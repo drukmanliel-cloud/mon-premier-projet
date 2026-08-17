@@ -27,28 +27,16 @@ boutonLocalisation.addEventListener('click', () => {
             const longitude = position.coords.longitude;
 
             map.setView([latitude, longitude], 16);
-const distributeursTest = [
+
+const distributeurs = [
     {
-        nom: "Distributeur Toutou Map 1",
-        emplacement: "Point test n°1",
-        lat: latitude + 0.0010,
-        lng: longitude + 0.0010
-    },
-    {
-        nom: "Distributeur Toutou Map 2",
-        emplacement: "Point test n°2",
-        lat: latitude - 0.0012,
-        lng: longitude + 0.0006
-    },
-    {
-        nom: "Distributeur Toutou Map 3",
-        emplacement: "Point test n°3",
-        lat: latitude + 0.0005,
-        lng: longitude - 0.0013
+        nom: "Distributeur Toutou Map",
+        emplacement: "23 rue Victor Basch, 94700 Maisons-Alfort",
+        lat: 48.8089423,
+        lng: 2.4457206
     }
 ];
-
-distributeursTest.forEach(distributeur => {
+distributeurs.forEach(distributeur => {
 
     const distance = map.distance(
         [latitude, longitude],
