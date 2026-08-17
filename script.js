@@ -32,11 +32,19 @@ const distributeursTest = [
     { nom: "Distributeur Toutou Map 2", lat: latitude - 0.0012, lng: longitude + 0.0006 },
     { nom: "Distributeur Toutou Map 3", lat: latitude + 0.0005, lng: longitude - 0.0013 }
 ];
-
 distributeursTest.forEach(distributeur => {
+
+    const distance = map.distance(
+        [latitude, longitude],
+        [distributeur.lat, distributeur.lng]
+    );
+
     L.marker([distributeur.lat, distributeur.lng])
         .addTo(map)
-        .bindPopup("🐾 " + distributeur.nom);
+        .bindPopup(
+            "🐾 " + distributeur.nom +
+            "<br>📏 Distance : " + Math.round(distance) + " m"
+        );
 });
 
             L.marker([latitude, longitude])
