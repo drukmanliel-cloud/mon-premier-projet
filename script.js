@@ -27,6 +27,17 @@ boutonLocalisation.addEventListener('click', () => {
             const longitude = position.coords.longitude;
 
             map.setView([latitude, longitude], 16);
+const distributeursTest = [
+    { nom: "Distributeur Toutou Map 1", lat: latitude + 0.0010, lng: longitude + 0.0010 },
+    { nom: "Distributeur Toutou Map 2", lat: latitude - 0.0012, lng: longitude + 0.0006 },
+    { nom: "Distributeur Toutou Map 3", lat: latitude + 0.0005, lng: longitude - 0.0013 }
+];
+
+distributeursTest.forEach(distributeur => {
+    L.marker([distributeur.lat, distributeur.lng])
+        .addTo(map)
+        .bindPopup("🐾 " + distributeur.nom);
+});
 
             L.marker([latitude, longitude])
                 .addTo(map)
@@ -37,16 +48,4 @@ boutonLocalisation.addEventListener('click', () => {
             alert("Impossible de récupérer votre position.");
         }
     );
-});
-// Distributeurs de test autour de l'utilisateur
-const distributeursTest = [
-    { nom: "Distributeur Toutou Map 1", lat: 48.8569, lng: 2.3535 },
-    { nom: "Distributeur Toutou Map 2", lat: 48.8558, lng: 2.3508 },
-    { nom: "Distributeur Toutou Map 3", lat: 48.8580, lng: 2.3548 }
-];
-
-distributeursTest.forEach(distributeur => {
-    L.marker([distributeur.lat, distributeur.lng])
-        .addTo(map)
-        .bindPopup("🐾 " + distributeur.nom);
 });
