@@ -38,3 +38,15 @@ boutonLocalisation.addEventListener('click', () => {
         }
     );
 });
+// Distributeurs de test autour de l'utilisateur
+const distributeursTest = [
+    { nom: "Distributeur Toutou Map 1", lat: 48.8569, lng: 2.3535 },
+    { nom: "Distributeur Toutou Map 2", lat: 48.8558, lng: 2.3508 },
+    { nom: "Distributeur Toutou Map 3", lat: 48.8580, lng: 2.3548 }
+];
+
+distributeursTest.forEach(distributeur => {
+    L.marker([distributeur.lat, distributeur.lng])
+        .addTo(map)
+        .bindPopup("🐾 " + distributeur.nom);
+});
