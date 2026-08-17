@@ -28,10 +28,26 @@ boutonLocalisation.addEventListener('click', () => {
 
             map.setView([latitude, longitude], 16);
 const distributeursTest = [
-    { nom: "Distributeur Toutou Map 1", lat: latitude + 0.0010, lng: longitude + 0.0010 },
-    { nom: "Distributeur Toutou Map 2", lat: latitude - 0.0012, lng: longitude + 0.0006 },
-    { nom: "Distributeur Toutou Map 3", lat: latitude + 0.0005, lng: longitude - 0.0013 }
+    {
+        nom: "Distributeur Toutou Map 1",
+        emplacement: "Point test n°1",
+        lat: latitude + 0.0010,
+        lng: longitude + 0.0010
+    },
+    {
+        nom: "Distributeur Toutou Map 2",
+        emplacement: "Point test n°2",
+        lat: latitude - 0.0012,
+        lng: longitude + 0.0006
+    },
+    {
+        nom: "Distributeur Toutou Map 3",
+        emplacement: "Point test n°3",
+        lat: latitude + 0.0005,
+        lng: longitude - 0.0013
+    }
 ];
+
 distributeursTest.forEach(distributeur => {
 
     const distance = map.distance(
@@ -42,11 +58,12 @@ distributeursTest.forEach(distributeur => {
     L.marker([distributeur.lat, distributeur.lng])
         .addTo(map)
         .bindPopup(
-            "🐾 " + distributeur.nom +
+            "🐾 <strong>" + distributeur.nom + "</strong>" +
+            "<br>📍 " + distributeur.emplacement +
             "<br>📏 Distance : " + Math.round(distance) + " m"
         );
 });
-
+    
             L.marker([latitude, longitude])
                 .addTo(map)
                 .bindPopup("📍 Vous êtes ici")
