@@ -37,3 +37,4 @@ boutonLocalisation.addEventListener('click', () => {
             alert("Impossible de récupérer votre position.");
         }
     );
+});
