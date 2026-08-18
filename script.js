@@ -7,6 +7,14 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap'
 }).addTo(map);
 
+const iconeUtilisateur = L.divIcon({
+    className: 'icone-utilisateur',
+    html: '<div class="point-utilisateur"></div>',
+    iconSize: [24, 24],
+    iconAnchor: [12, 12],
+    popupAnchor: [0, -15]
+});
+
 // Premier distributeur de test
 L.marker([48.8566, 2.3522])
     .addTo(map)
@@ -83,7 +91,7 @@ map.fitBounds(limites, {
         )
         .openOn(map);
 }
-            L.marker([latitude, longitude])
+           L.marker([latitude, longitude], { icon: iconeUtilisateur })
                 .addTo(map)
                 .bindPopup("📍 Vous êtes ici");
         },
