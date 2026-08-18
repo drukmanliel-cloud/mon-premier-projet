@@ -32,16 +32,22 @@ const longitude = modeTestMaisonsAlfort ? 2.4398 : position.coords.longitude;
 
 const distributeurs = [
     {
-        nom: "Distributeur Toutou Map",
+        nom: "Distributeur Toutou Map 1",
         emplacement: "23 rue Victor Basch, 94700 Maisons-Alfort",
         lat: 48.8089423,
         lng: 2.4457206
+    },
+    {
+        nom: "Distributeur Toutou Map 2",
+        emplacement: "69 rue de Vincennes, 94700 Maisons-Alfort",
+        lat: 48.8104754,
+        lng: 2.4480543
     }
 ];
 let distributeurLePlusProche = null;
 let distanceMin = Infinity;
-distributeurs.forEach(distributeur => {
 
+distributeurs.forEach(distributeur => {
     const distance = map.distance(
         [latitude, longitude],
         [distributeur.lat, distributeur.lng]
