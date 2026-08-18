@@ -89,11 +89,14 @@ map.fitBounds(limites, {
 }); 
  L.popup()
         .setLatLng([distributeurLePlusProche.lat, distributeurLePlusProche.lng])
-        .setContent(
-            "⭐ <strong>Distributeur le plus proche</strong>" +
-            "<br>📍 " + distributeurLePlusProche.emplacement +
-            "<br>📏 Distance : " + Math.round(distanceMin) + " m"
-        )
+       .setContent(
+    "⭐ <strong>Distributeur le plus proche</strong>" +
+    "<br>📍 " + distributeurLePlusProche.emplacement +
+    "<br>📏 Distance : " + Math.round(distanceMin) + " m" +
+    "<br><br><a href='https://www.google.com/maps/dir/?api=1&destination=" +
+    distributeurLePlusProche.lat + "," + distributeurLePlusProche.lng +
+    "' target='_blank' style='display:inline-block;padding:10px 14px;background:#65439b;color:white;text-decoration:none;border-radius:8px;font-weight:bold;'>🚶 Y aller</a>"
+)
         .openOn(map);
 }
            L.marker([latitude, longitude], { icon: iconeUtilisateur })
