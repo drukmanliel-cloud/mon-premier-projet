@@ -9,12 +9,11 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 const iconeUtilisateur = L.divIcon({
     className: 'icone-utilisateur',
-    html: '<div class="point-utilisateur"></div>',
-    iconSize: [24, 24],
-    iconAnchor: [12, 12],
-    popupAnchor: [0, -15]
+    html: '<div style="width:30px;height:30px;background:red;border:5px solid white;border-radius:50%;"></div>',
+    iconSize: [40, 40],
+    iconAnchor: [20, 20],
+    popupAnchor: [0, -20]
 });
-
 // Premier distributeur de test
 L.marker([48.8566, 2.3522])
     .addTo(map)
