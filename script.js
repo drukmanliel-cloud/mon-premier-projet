@@ -38,13 +38,18 @@ const distributeurs = [
         lng: 2.4457206
     }
 ];
+let distributeurLePlusProche = null;
+let distanceMin = Infinity;
 distributeurs.forEach(distributeur => {
 
     const distance = map.distance(
         [latitude, longitude],
         [distributeur.lat, distributeur.lng]
     );
-
+if (distance < distanceMin) {
+    distanceMin = distance;
+    distributeurLePlusProche = distributeur;
+}
     L.marker([distributeur.lat, distributeur.lng])
         .addTo(map)
         .bindPopup(
@@ -53,11 +58,19 @@ distributeurs.forEach(distributeur => {
             "<br>📏 Distance : " + Math.round(distance) + " m"
         );
 });
-    
+    if (distributeurLePlusProche) {
+    L.popup()
+        .setLatLng([distributeurLePlusProche.lat, distributeurLePlusProche.lng])
+        .setContent(
+            "⭐ <strong>Distributeur le plus proche</strong>" +
+            "<br>📍 " + distributeurLePlusProche.emplacement +
+            "<br>📏 Distance : " + Math.round(distanceMin) + " m"
+        )
+        .openOn(map);
+}
             L.marker([latitude, longitude])
                 .addTo(map)
-                .bindPopup("📍 Vous êtes ici")
-                .openPopup();
+                .bindPopup("📍 Vous êtes ici");
         },
         () => {
             alert("Impossible de récupérer votre position.");
