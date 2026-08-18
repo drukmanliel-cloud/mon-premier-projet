@@ -49,7 +49,13 @@ const distributeurs = [
         emplacement: "69 rue de Vincennes, 94700 Maisons-Alfort",
         lat: 48.8104754,
         lng: 2.4480543
-    }
+    },
+{
+    nom: "Distributeur Toutou Map 3",
+    emplacement: "22 rue Georges Gaume, 94700 Maisons-Alfort",
+    lat: 48.800876,
+    lng: 2.4415527
+}
 ];
 let distributeurLePlusProche = null;
 let distanceMin = Infinity;
