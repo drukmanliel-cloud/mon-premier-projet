@@ -23,8 +23,10 @@ boutonLocalisation.addEventListener('click', () => {
 
     navigator.geolocation.getCurrentPosition(
         (position) => {
-            const latitude = position.coords.latitude;
-            const longitude = position.coords.longitude;
+            const modeTestMaisonsAlfort = true;
+
+const latitude = modeTestMaisonsAlfort ? 48.8096 : position.coords.latitude;
+const longitude = modeTestMaisonsAlfort ? 2.4398 : position.coords.longitude;
 
             map.setView([latitude, longitude], 16);
 
