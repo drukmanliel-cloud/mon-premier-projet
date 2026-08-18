@@ -65,7 +65,16 @@ if (distance < distanceMin) {
         );
 });
     if (distributeurLePlusProche) {
-    L.popup()
+  const limites = L.latLngBounds(
+    [latitude, longitude],
+    [distributeurLePlusProche.lat, distributeurLePlusProche.lng]
+);
+
+map.fitBounds(limites, {
+    padding: [80, 80],
+    maxZoom: 16
+}); 
+ L.popup()
         .setLatLng([distributeurLePlusProche.lat, distributeurLePlusProche.lng])
         .setContent(
             "⭐ <strong>Distributeur le plus proche</strong>" +
