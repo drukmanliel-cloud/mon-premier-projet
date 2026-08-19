@@ -78,7 +78,7 @@ button {
     font-size: 17px;
     font-weight: 700;
     cursor: pointer;
-    box-shadow: 0 8px 20px rgba(91, 63, 140, 0.25);
+    box-shadow: 0 8px 20px rgba(11, 143, 60, 0.25);
 }
 
 button:hover {
