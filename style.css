@@ -158,3 +158,53 @@ main section:nth-child(2) p {
     background: white;
     border-radius: 50%;
 }
+.icone-distributeur-proche {
+    background: transparent;
+    border: none;
+}
+
+.marqueur-distributeur-proche {
+    width: 34px;
+    height: 34px;
+    background: #65439b;
+    border: 4px solid white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    line-height: 34px;
+    text-align: center;
+    box-sizing: border-box;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+}
+.marqueur-distributeur-proche span {
+    display: block;
+    font-size: 18px;
+    line-height: 1;
+}
+.icone-distributeur-proche {
+    background: transparent !important;
+    border: none !important;
+}
+
+.icone-distributeur-proche .marqueur-distributeur-proche {
+    width: 34px !important;
+    height: 34px !important;
+    background: #65439b !important;
+    border: 4px solid white !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+}
+
+.icone-distributeur-proche .patte {
+    display: block !important;
+    color: white !important;
+    font-size: 18px !important;
+    line-height: 1 !important;
+    position: relative !important;
+    z-index: 999 !important;
+}

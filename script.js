@@ -82,16 +82,17 @@ distributeurs.forEach(distributeur => {
     }
 });
     if (distributeurLePlusProche) {
-marqueurPlusProche = L.circleMarker(
+const iconeDistributeurProche = L.divIcon({
+    className: 'icone-distributeur-proche',
+html: '<div class="marqueur-distributeur-proche"><span class="patte">●</span></div>',
+    iconSize: [34, 34],
+    iconAnchor: [17, 17],
+    popupAnchor: [0, -18]
+});
+
+marqueurPlusProche = L.marker(
     [distributeurLePlusProche.lat, distributeurLePlusProche.lng],
-    {
-        radius: 10,
-        fillColor: "#65439b",
-        color: "#ffffff",
-        weight: 4,
-        opacity: 1,
-        fillOpacity: 1
-    }
+    { icon: iconeDistributeurProche }
 ).addTo(map);
 
   const limites = L.latLngBounds(
