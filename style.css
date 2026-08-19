@@ -260,3 +260,18 @@ main section:nth-child(2) p {
     left: 7px;
     top: 13px;
 }
+/* ===== BOUTONS CHARTE TOUTOU MAP ===== */
+
+button,
+.btn-itineraire {
+    background: #0B8F3C !important;
+    background-color: #0B8F3C !important;
+    color: white !important;
+    border: none !important;
+}
+
+button:hover,
+.btn-itineraire:hover {
+    background: #087A33 !important;
+    background-color: #087A33 !important;
+}
