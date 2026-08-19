@@ -59,6 +59,7 @@ const distributeurs = lignes.map(ligne => {
 let distributeurLePlusProche = null;
 let distanceMin = Infinity;
 
+let marqueurPlusProche = null;
 distributeurs.forEach(distributeur => {
     const distance = map.distance(
         [latitude, longitude],
@@ -66,9 +67,9 @@ distributeurs.forEach(distributeur => {
     );
 
     if (distance < distanceMin) {
-        distanceMin = distance;
-        distributeurLePlusProche = distributeur;
-    }
+    distanceMin = distance;
+    distributeurLePlusProche = distributeur;
+}
 
     if (distance <= 5000) {
         L.marker([distributeur.lat, distributeur.lng])
@@ -81,6 +82,18 @@ distributeurs.forEach(distributeur => {
     }
 });
     if (distributeurLePlusProche) {
+marqueurPlusProche = L.circleMarker(
+    [distributeurLePlusProche.lat, distributeurLePlusProche.lng],
+    {
+        radius: 10,
+        fillColor: "#65439b",
+        color: "#ffffff",
+        weight: 4,
+        opacity: 1,
+        fillOpacity: 1
+    }
+).addTo(map);
+
   const limites = L.latLngBounds(
     [latitude, longitude],
     [distributeurLePlusProche.lat, distributeurLePlusProche.lng]
