@@ -275,3 +275,44 @@ button:hover,
     background: #087A33 !important;
     background-color: #087A33 !important;
 }
+/* =========================================
+   CHARTE GRAPHIQUE TOUTOU MAP - VERT
+   ========================================= */
+
+/* Logo / titre Toutou Map */
+header h1 {
+    color: #0B8F3C !important;
+}
+
+/* Titres principaux */
+main h1,
+main h2,
+main section h2 {
+    color: #0B8F3C !important;
+}
+
+/* Boutons principaux */
+button,
+.btn-itineraire {
+    background: #0B8F3C !important;
+    background-color: #0B8F3C !important;
+    color: white !important;
+    border: none !important;
+}
+
+/* Survol des boutons */
+button:hover,
+.btn-itineraire:hover {
+    background: #087A33 !important;
+    background-color: #087A33 !important;
+}
+
+/* Liens du menu au survol */
+nav a:hover {
+    color: #0B8F3C !important;
+}
+
+/* Ombre des boutons */
+button {
+    box-shadow: 0 8px 20px rgba(11, 143, 60, 0.20) !important;
+}
