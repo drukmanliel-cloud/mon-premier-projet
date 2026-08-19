@@ -30,7 +30,7 @@ boutonLocalisation.addEventListener('click', () => {
 
     navigator.geolocation.getCurrentPosition(
             async (position) => {
-            const modeTestMaisonsAlfort = true;
+            const modeTestMaisonsAlfort = false;
 
 const latitude = modeTestMaisonsAlfort ? 48.8096 : position.coords.latitude;
 const longitude = modeTestMaisonsAlfort ? 2.4398 : position.coords.longitude;
