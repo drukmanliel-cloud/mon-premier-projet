@@ -120,7 +120,7 @@ map.fitBounds(limites, {
     "<br>📏 Distance : " + Math.round(distanceMin) + " m" +
     "<br><br><a href='https://www.google.com/maps/dir/?api=1&destination=" +
     distributeurLePlusProche.lat + "," + distributeurLePlusProche.lng +
-    "' target='_blank' style='display:inline-block;padding:10px 14px;background:#65439b;color:white;text-decoration:none;border-radius:8px;font-weight:bold;'>🚶 Y aller</a>"
+    "' target='_blank' style='display:inline-block;padding:10px 14px;background:#0B8F3C;color:white;text-decoration:none;border-radius:8px;font-weight:bold;'>🚶 Y aller</a>"
 )
         .openOn(map);
 }
