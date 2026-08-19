@@ -84,7 +84,15 @@ distributeurs.forEach(distributeur => {
     if (distributeurLePlusProche) {
 const iconeDistributeurProche = L.divIcon({
     className: 'icone-distributeur-proche',
-html: '<div class="marqueur-distributeur-proche"><span class="patte">●</span></div>',
+html: `
+<div class="marqueur-distributeur-proche">
+    <span class="coussinet coussinet-1"></span>
+    <span class="coussinet coussinet-2"></span>
+    <span class="coussinet coussinet-3"></span>
+    <span class="coussinet coussinet-4"></span>
+    <span class="coussinet-central"></span>
+</div>
+`,
     iconSize: [34, 34],
     iconAnchor: [17, 17],
     popupAnchor: [0, -18]
