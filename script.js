@@ -29,7 +29,7 @@ boutonLocalisation.addEventListener('click', () => {
     }
 
     navigator.geolocation.getCurrentPosition(
-        (position) => {
+            async (position) => {
             const modeTestMaisonsAlfort = true;
 
 const latitude = modeTestMaisonsAlfort ? 48.8096 : position.coords.latitude;
@@ -37,26 +37,25 @@ const longitude = modeTestMaisonsAlfort ? 2.4398 : position.coords.longitude;
 
             map.setView([latitude, longitude], 16);
 
-const distributeurs = [
-    {
-        nom: "Distributeur Toutou Map 1",
-        emplacement: "23 rue Victor Basch, 94700 Maisons-Alfort",
-        lat: 48.8089423,
-        lng: 2.4457206
-    },
-    {
-        nom: "Distributeur Toutou Map 2",
-        emplacement: "69 rue de Vincennes, 94700 Maisons-Alfort",
-        lat: 48.8104754,
-        lng: 2.4480543
-    },
-{
-    nom: "Distributeur Toutou Map 3",
-    emplacement: "22 rue Georges Gaume, 94700 Maisons-Alfort",
-    lat: 48.800876,
-    lng: 2.4415527
-}
-];
+const reponse = await fetch('distributeurs-sacs-canins.csv');
+const texteCSV = await reponse.text();
+
+const lignes = texteCSV.trim().split('\n');
+lignes.shift();
+
+const distributeurs = lignes.map(ligne => {
+    const colonnes = ligne.split(',');
+
+    return {
+        nom: "Distributeur Toutou Map",
+        emplacement: colonnes[4],
+        lat: parseFloat(colonnes[1]),
+        lng: parseFloat(colonnes[2])
+    };
+}).filter(distributeur =>
+    !isNaN(distributeur.lat) &&
+    !isNaN(distributeur.lng)
+);
 let distributeurLePlusProche = null;
 let distanceMin = Infinity;
 
