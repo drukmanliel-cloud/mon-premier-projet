@@ -64,17 +64,21 @@ distributeurs.forEach(distributeur => {
         [latitude, longitude],
         [distributeur.lat, distributeur.lng]
     );
-if (distance < distanceMin) {
-    distanceMin = distance;
-    distributeurLePlusProche = distributeur;
-}
-    L.marker([distributeur.lat, distributeur.lng])
-        .addTo(map)
-        .bindPopup(
-            "🐾 <strong>" + distributeur.nom + "</strong>" +
-            "<br>📍 " + distributeur.emplacement +
-            "<br>📏 Distance : " + Math.round(distance) + " m"
-        );
+
+    if (distance < distanceMin) {
+        distanceMin = distance;
+        distributeurLePlusProche = distributeur;
+    }
+
+    if (distance <= 5000) {
+        L.marker([distributeur.lat, distributeur.lng])
+            .addTo(map)
+            .bindPopup(
+                "🐾 <strong>" + distributeur.nom + "</strong>" +
+                "<br>📍 " + distributeur.emplacement +
+                "<br>📏 Distance : " + Math.round(distance) + " m"
+            );
+    }
 });
     if (distributeurLePlusProche) {
   const limites = L.latLngBounds(
