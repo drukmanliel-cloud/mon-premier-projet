@@ -102,7 +102,19 @@ marqueurPlusProche = L.marker(
     [distributeurLePlusProche.lat, distributeurLePlusProche.lng],
     { icon: iconeDistributeurProche }
 ).addTo(map);
-s
+
+marqueurPlusProche.bindPopup(
+marqueurPlusProche.on('click', function () {
+    alert('La patte fonctionne !');
+});
+    "⭐ <strong>Distributeur le plus proche</strong>" +
+    "<br>📍 " + distributeurLePlusProche.emplacement +
+    "<br>🟢 <strong>PLEIN</strong>" +
+    "<br>📏 Distance : " + Math.round(distanceMin) + " m" +
+    "<br><br><a href='https://www.google.com/maps/dir/?api=1&destination=" +
+    distributeurLePlusProche.lat + "," + distributeurLePlusProche.lng +
+    "' target='_blank' style='display:inline-block;padding:10px 14px;background:#0B8F3C;color:white;text-decoration:none;border-radius:8px;font-weight:bold;'>🚶 Y aller</a>"
+);
   const limites = L.latLngBounds(
     [latitude, longitude],
     [distributeurLePlusProche.lat, distributeurLePlusProche.lng]
@@ -112,18 +124,7 @@ map.fitBounds(limites, {
     padding: [80, 80],
     maxZoom: 16
 }); 
- L.popup()
-        .setLatLng([distributeurLePlusProche.lat, distributeurLePlusProche.lng])
-       .setContent(
-    "⭐ <strong>Distributeur le plus proche</strong>" +
-    "<br>📍 " + distributeurLePlusProche.emplacement +
-    "<br>🟢 <strong>PLEIN</strong>" +
-    "<br>📏 Distance : " + Math.round(distanceMin) + " m" +
-    "<br><br><a href='https://www.google.com/maps/dir/?api=1&destination=" +
-    distributeurLePlusProche.lat + "," + distributeurLePlusProche.lng +
-    "' target='_blank' style='display:inline-block;padding:10px 14px;background:#0B8F3C;color:white;text-decoration:none;border-radius:8px;font-weight:bold;'>🚶 Y aller</a>"
-)
-        .openOn(map);
+
 }
            L.marker([latitude, longitude], { icon: iconeUtilisateur })
                 .addTo(map)

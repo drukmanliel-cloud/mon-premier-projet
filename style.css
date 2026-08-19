@@ -338,3 +338,11 @@ main section:first-child > p:first-child {
     background: #087A33 !important;
     background-color: #087A33 !important;
 }
+.icone-distributeur-proche {
+    pointer-events: auto !important;
+}
+
+.marqueur-distributeur-proche,
+.marqueur-distributeur-proche * {
+    pointer-events: none !important;
+}
