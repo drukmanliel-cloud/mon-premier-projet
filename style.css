@@ -143,7 +143,7 @@ main section:nth-child(2) p {
 .point-utilisateur {
     width: 24px;
     height: 24px;
-    background: #65439b !important;
+    background: #2196F3 !important;
     border: 4px solid white;
     border-radius: 50%;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
@@ -166,7 +166,7 @@ main section:nth-child(2) p {
 .marqueur-distributeur-proche {
     width: 34px;
     height: 34px;
-    background: #65439b;
+    background: #0B8F3C;
     border: 4px solid white;
     border-radius: 50%;
     display: flex;
@@ -191,7 +191,7 @@ main section:nth-child(2) p {
 .icone-distributeur-proche .marqueur-distributeur-proche {
     width: 34px !important;
     height: 34px !important;
-    background: #65439b !important;
+    background: #0B8F3C !important;
     border: 4px solid white !important;
     border-radius: 50% !important;
     display: flex !important;
@@ -211,7 +211,7 @@ main section:nth-child(2) p {
 .marqueur-distributeur-proche {
     width: 34px;
     height: 34px;
-    background: #65439b;
+    background: #0B8F3C;
     border: 4px solid white;
     border-radius: 50%;
     position: relative;
