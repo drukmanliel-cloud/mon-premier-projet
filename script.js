@@ -102,7 +102,7 @@ marqueurPlusProche = L.marker(
     [distributeurLePlusProche.lat, distributeurLePlusProche.lng],
     { icon: iconeDistributeurProche }
 ).addTo(map);
-
+s
   const limites = L.latLngBounds(
     [latitude, longitude],
     [distributeurLePlusProche.lat, distributeurLePlusProche.lng]
@@ -117,6 +117,7 @@ map.fitBounds(limites, {
        .setContent(
     "⭐ <strong>Distributeur le plus proche</strong>" +
     "<br>📍 " + distributeurLePlusProche.emplacement +
+    "<br>🟢 <strong>PLEIN</strong>" +
     "<br>📏 Distance : " + Math.round(distanceMin) + " m" +
     "<br><br><a href='https://www.google.com/maps/dir/?api=1&destination=" +
     distributeurLePlusProche.lat + "," + distributeurLePlusProche.lng +
