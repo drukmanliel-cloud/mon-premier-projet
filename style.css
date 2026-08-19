@@ -316,3 +316,25 @@ nav a:hover {
 button {
     box-shadow: 0 8px 20px rgba(11, 143, 60, 0.20) !important;
 }
+/* =========================================
+   SUPPRESSION DES DERNIERS ELEMENTS VIOLETS
+   ========================================= */
+
+/* Texte d'introduction au-dessus du grand titre */
+main section:first-child > p:first-child {
+    color: #0B8F3C !important;
+}
+
+/* Bouton Y aller dans la popup Leaflet */
+.leaflet-popup-content button,
+.leaflet-popup-content .btn-itineraire {
+    background: #0B8F3C !important;
+    background-color: #0B8F3C !important;
+    color: white !important;
+}
+
+.leaflet-popup-content button:hover,
+.leaflet-popup-content .btn-itineraire:hover {
+    background: #087A33 !important;
+    background-color: #087A33 !important;
+}
