@@ -104,9 +104,6 @@ marqueurPlusProche = L.marker(
 ).addTo(map);
 
 marqueurPlusProche.bindPopup(
-marqueurPlusProche.on('click', function () {
-    alert('La patte fonctionne !');
-});
     "⭐ <strong>Distributeur le plus proche</strong>" +
     "<br>📍 " + distributeurLePlusProche.emplacement +
     "<br>🟢 <strong>PLEIN</strong>" +
@@ -115,6 +112,10 @@ marqueurPlusProche.on('click', function () {
     distributeurLePlusProche.lat + "," + distributeurLePlusProche.lng +
     "' target='_blank' style='display:inline-block;padding:10px 14px;background:#0B8F3C;color:white;text-decoration:none;border-radius:8px;font-weight:bold;'>🚶 Y aller</a>"
 );
+marqueurPlusProche.on('click', function () {
+    alert('La patte fonctionne !');
+});
+
   const limites = L.latLngBounds(
     [latitude, longitude],
     [distributeurLePlusProche.lat, distributeurLePlusProche.lng]
