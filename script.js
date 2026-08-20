@@ -108,11 +108,12 @@ marqueurPlusProche.bindPopup(
     "<br>📍 " + distributeurLePlusProche.emplacement +
     "<br>🟢 <strong>PLEIN</strong>" +
     "<br>📏 Distance : " + Math.round(distanceMin) + " m" +
-    "<br><br><a href='https://www.google.com/maps/dir/?api=1&destination=" +
+"<br><br>" +
+"<a href='#' style='display:inline-block;padding:10px 14px;background:#ffffff;color:#0B8F3C;text-decoration:none;border:2px solid #0B8F3C;border-radius:8px;font-weight:bold;margin-right:8px;'>📄 Voir la fiche</a>" +
+    "<a href='https://www.google.com/maps/dir/?api=1&destination=" +
     distributeurLePlusProche.lat + "," + distributeurLePlusProche.lng +
     "' target='_blank' style='display:inline-block;padding:10px 14px;background:#0B8F3C;color:white;text-decoration:none;border-radius:8px;font-weight:bold;'>🚶 Y aller</a>"
 );
-
   const limites = L.latLngBounds(
     [latitude, longitude],
     [distributeurLePlusProche.lat, distributeurLePlusProche.lng]
