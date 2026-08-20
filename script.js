@@ -112,9 +112,6 @@ marqueurPlusProche.bindPopup(
     distributeurLePlusProche.lat + "," + distributeurLePlusProche.lng +
     "' target='_blank' style='display:inline-block;padding:10px 14px;background:#0B8F3C;color:white;text-decoration:none;border-radius:8px;font-weight:bold;'>🚶 Y aller</a>"
 );
-marqueurPlusProche.on('click', function () {
-    alert('La patte fonctionne !');
-});
 
   const limites = L.latLngBounds(
     [latitude, longitude],
