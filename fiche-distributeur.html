@@ -59,11 +59,11 @@
 
         <h1>🐾 Toutou Map</h1>
 
-        <h2>📍 Distributeur Quiberon</h2>
+<h2>📍 Distributeur <span id="nom-distributeur"></span></h2>
 
-        <p class="etat">🟢 PLEIN</p>
+        <p>📍 Emplacement : <span id="emplacement"></span></p>
 
-        <p>📍 Emplacement : Quiberon</p>
+        <p class="etat">🟢 <span id="etat"></span></p>
 
         <p>💩 Distributeur de sacs à déjections canines</p>
 
@@ -78,6 +78,14 @@
         </a>
 
     </div>
+<script>
+const params = new URLSearchParams(window.location.search);
 
+const emplacement = params.get("emplacement");
+const etat = params.get("etat");
+document.getElementById("emplacement").textContent = emplacement || "Non renseigné";
+document.getElementById("nom-distributeur").textContent = emplacement || "Non renseigné";
+document.getElementById("etat").textContent = etat || "Non renseigné";
+</script>
 </body>
 </html>
