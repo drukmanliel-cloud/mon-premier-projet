@@ -67,11 +67,12 @@
 
         <p>💩 Distributeur de sacs à déjections canines</p>
 
-        <a class="bouton"
-           href="https://www.google.com/maps/dir/?api=1&destination=47.483,-3.119"
-           target="_blank">
-            🚶 Y aller
-        </a>
+      <a class="bouton"
+    id="bouton-itineraire"
+    href="#"
+    target="_blank">
+    🚶 Y aller
+</a>
 
         <a class="retour" href="index.html">
             ← Retour à Toutou Map
@@ -83,9 +84,18 @@ const params = new URLSearchParams(window.location.search);
 
 const emplacement = params.get("emplacement");
 const etat = params.get("etat");
+const lat = params.get("lat");
+const lng = params.get("lng");
+
 document.getElementById("emplacement").textContent = emplacement || "Non renseigné";
 document.getElementById("nom-distributeur").textContent = emplacement || "Non renseigné";
 document.getElementById("etat").textContent = etat || "Non renseigné";
+
+if (lat && lng) {
+    document.getElementById("bouton-itineraire").href =
+        "https://www.google.com/maps/dir/?api=1&destination=" + lat + "," + lng;
+}
+
 </script>
 </body>
 </html>
