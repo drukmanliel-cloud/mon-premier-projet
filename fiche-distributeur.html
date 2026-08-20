@@ -63,7 +63,10 @@
 
         <p>📍 Emplacement : <span id="emplacement"></span></p>
 
-        <p class="etat">🟢 <span id="etat"></span></p>
+        <p class="etat" id="bloc-etat">
+    <span id="icone-etat">🟢</span>
+    <span id="etat"></span>
+</p>
 
         <p>💩 Distributeur de sacs à déjections canines</p>
 
@@ -90,6 +93,15 @@ const lng = params.get("lng");
 document.getElementById("emplacement").textContent = emplacement || "Non renseigné";
 document.getElementById("nom-distributeur").textContent = emplacement || "Non renseigné";
 document.getElementById("etat").textContent = etat || "Non renseigné";
+const iconeEtat = document.getElementById("icone-etat");
+
+if (etat === "PLEIN") {
+    iconeEtat.textContent = "🟢";
+} else if (etat === "VIDE") {
+    iconeEtat.textContent = "🔴";
+} else {
+    iconeEtat.textContent = "⚪";
+}
 
 if (lat && lng) {
     document.getElementById("bouton-itineraire").href =
