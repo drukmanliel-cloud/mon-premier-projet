@@ -46,12 +46,13 @@ lignes.shift();
 const distributeurs = lignes.map(ligne => {
     const colonnes = ligne.split(',');
 
-    return {
-        nom: "Distributeur Toutou Map",
-        emplacement: colonnes[4],
-        lat: parseFloat(colonnes[1]),
-        lng: parseFloat(colonnes[2])
-    };
+   return {
+    nom: "Distributeur Toutou Map",
+    emplacement: colonnes[4],
+    lat: parseFloat(colonnes[1]),
+    lng: parseFloat(colonnes[2]),
+    etat: "À VÉRIFIER"
+};
 }).filter(distributeur =>
     !isNaN(distributeur.lat) &&
     !isNaN(distributeur.lng)
@@ -74,11 +75,13 @@ distributeurs.forEach(distributeur => {
     if (distance <= 5000) {
         L.marker([distributeur.lat, distributeur.lng])
             .addTo(map)
-            .bindPopup(
-                "🐾 <strong>" + distributeur.nom + "</strong>" +
-                "<br>📍 " + distributeur.emplacement +
-                "<br>📏 Distance : " + Math.round(distance) + " m"
-            );
+           .bindPopup(
+    "🐾 <strong>" + distributeur.nom + "</strong>" +
+    "<br>📍 " + distributeur.emplacement +
+    "<br>" + (distributeur.etat === "PLEIN" ? "🟢" : distributeur.etat === "VIDE" ? "🔴" : "⚪") +
+" <strong>" + distributeur.etat + "</strong>" +
+    "<br>📏 Distance : " + Math.round(distance) + " m"
+);
     }
 });
     if (distributeurLePlusProche) {
@@ -106,14 +109,14 @@ marqueurPlusProche = L.marker(
 marqueurPlusProche.bindPopup(
     "⭐ <strong>Distributeur le plus proche</strong>" +
     "<br>📍 " + distributeurLePlusProche.emplacement +
-    "<br>🟢 <strong>PLEIN</strong>" +
+    "<br>" + (distributeurLePlusProche.etat === "PLEIN" ? "🟢" : distributeurLePlusProche.etat === "VIDE" ? "🔴" : "⚪") + " <strong>" + distributeurLePlusProche.etat + "</strong>" +
     "<br>📏 Distance : " + Math.round(distanceMin) + " m" +
 "<br><br>" +
 "<a href='fiche-distributeur.html?emplacement=" +
 encodeURIComponent(distributeurLePlusProche.emplacement) +
 "&lat=" + distributeurLePlusProche.lat +
 "&lng=" + distributeurLePlusProche.lng +
-"&etat=PLEIN' style='display:inline-block;padding:10px 14px;background:#ffffff;color:#0B8F3C;text-decoration:none;border:2px solid #0B8F3C;border-radius:8px;font-weight:bold;margin-right:8px;'>📄 Voir la fiche</a>" +
+"&etat=" + encodeURIComponent(distributeurLePlusProche.etat) + "' style='display:inline-block;padding:10px 14px;background:#ffffff;color:#0B8F3C;text-decoration:none;border:2px solid #0B8F3C;border-radius:8px;font-weight:bold;margin-right:8px;'>📄 Voir la fiche</a>" +
     "<a href='https://www.google.com/maps/dir/?api=1&destination=" +
     distributeurLePlusProche.lat + "," + distributeurLePlusProche.lng +
     "' target='_blank' style='display:inline-block;padding:10px 14px;background:#0B8F3C;color:white;text-decoration:none;border-radius:8px;font-weight:bold;'>🚶 Y aller</a>"
