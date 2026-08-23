@@ -89,6 +89,7 @@
         </a>
 
     </div>
+
 <script>
 const params = new URLSearchParams(window.location.search);
 
@@ -114,6 +115,16 @@ if (lat && lng) {
     document.getElementById("bouton-itineraire").href =
         "https://www.google.com/maps/dir/?api=1&destination=" + lat + "," + lng;
 }
+document.getElementById("bouton-plein").addEventListener("click", function () {
+    document.getElementById("etat").textContent = "PLEIN";
+    document.getElementById("icone-etat").textContent = "🟢";
+});
+
+document.getElementById("bouton-vide").addEventListener("click", function () {
+    document.getElementById("etat").textContent = "VIDE";
+    document.getElementById("icone-etat").textContent = "🔴";
+});
+
 
 </script>
 </body>
