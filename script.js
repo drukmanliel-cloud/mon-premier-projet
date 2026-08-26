@@ -37,28 +37,64 @@ const longitude = modeTestMaisonsAlfort ? 2.4398 : position.coords.longitude;
 
             map.setView([latitude, longitude], 16);
 
-const reponse = await fetch('distributeurs-sacs-canins.csv');
-const texteCSV = await reponse.text();
+// ===== RÉCUPÉRATION DES DISTRIBUTEURS DEPUIS SUPABASE =====
 
-const lignes = texteCSV.trim().split('\n');
-lignes.shift();
+const SUPABASE_URL = "https://lhkmboiukbjqdgminwod.supabase.co";
+const SUPABASE_KEY = "sb_publishable_Ce2x-kfGFq7hZ7f4yH7C2A_-EuAEtEj";
 
-const distributeurs = lignes.map(ligne => {
-    const colonnes = ligne.split(',');
+let toutesLesLignes = [];
+let offset = 0;
+const limite = 1000;
 
-   return {
-    nom: "Distributeur Toutou Map",
-    emplacement: colonnes[4],
-    lat: parseFloat(colonnes[1]),
-    lng: parseFloat(colonnes[2]),
-    etat: "À VÉRIFIER"
-};
-}).filter(distributeur =>
-    !isNaN(distributeur.lat) &&
-    !isNaN(distributeur.lng)
-);
-let distributeurLePlusProche = null;
-let distanceMin = Infinity;
+while (true) {
+
+    const reponse = await fetch(
+        SUPABASE_URL +
+        "/rest/v1/distributeurs" +
+        "?select=osm_id,latitude,longitude,city_name,etat" +
+        "&limit=" + limite +
+        "&offset=" + offset,
+        {
+            headers: {
+                "apikey": SUPABASE_KEY
+            }
+        }
+    );
+
+    if (!reponse.ok) {
+        throw new Error("Impossible de récupérer les distributeurs depuis Supabase");
+    }
+
+    const lot = await reponse.json();
+
+    toutesLesLignes = toutesLesLignes.concat(lot);
+
+    if (lot.length < limite) {
+        break;
+    }
+
+    offset += limite;
+}
+
+const distributeurs = toutesLesLignes
+    .filter(distributeur =>
+        distributeur.latitude !== null &&
+        distributeur.longitude !== null
+    )
+    .map(distributeur => ({
+        nom: "Distributeur Toutou Map",
+        emplacement: distributeur.city_name || "Emplacement non renseigné",
+        lat: parseFloat(distributeur.latitude),
+        lng: parseFloat(distributeur.longitude),
+
+        // Supabase contient plein/vide en minuscules.
+        // Le reste de ton code utilise PLEIN/VIDE en majuscules.
+        etat: distributeur.etat
+            ? distributeur.etat.toUpperCase()
+            : "À VÉRIFIER"
+    }));
+
+console.log(distributeurs.length + " distributeurs chargés depuis Supabase");
 
 let marqueurPlusProche = null;
 distributeurs.forEach(distributeur => {
@@ -132,7 +168,7 @@ map.fitBounds(limites, {
 }); 
 
 }
-           L.marker([latitude, longitude], { icon: iconeUtilisateur })
+           L.marker(f[latitude, longitude], { icon: iconeUtilisateur })
                 .addTo(map)
                 .bindPopup("📍 Vous êtes ici");
         },
