@@ -89,7 +89,7 @@
         </a>
 
     </div>
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const params = new URLSearchParams(window.location.search);
 
@@ -115,17 +115,59 @@ if (lat && lng) {
     document.getElementById("bouton-itineraire").href =
         "https://www.google.com/maps/dir/?api=1&destination=" + lat + "," + lng;
 }
-document.getElementById("bouton-plein").addEventListener("click", function () {
+// ===== CONNEXION SUPABASE =====
+const SUPABASE_URL = "https://lhkmboiukbjqdgminwod.supabase.co";
+
+const SUPABASE_KEY = "sb_publishable_Ce2x-kfGFq7hZ7f4yH7C2A_-EuAEtEj";
+
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+// ===== BOUTON : IL Y A DES SACS =====
+document.getElementById("bouton-plein").addEventListener("click", async function () {
+
+    const { error } = await supabaseClient
+        .from("distributeurs")
+        .update({ etat: "plein" })
+        .eq("latitude", parseFloat(lat))
+        .eq("longitude", parseFloat(lng));
+
+    if (error) {
+        console.error("Erreur Supabase :", error);
+        alert("Erreur pendant l'enregistrement");
+        return;
+    }
+
     document.getElementById("etat").textContent = "PLEIN";
     document.getElementById("icone-etat").textContent = "🟢";
+
+    alert("✅ Statut PLEIN enregistré !");
 });
 
-document.getElementById("bouton-vide").addEventListener("click", function () {
+
+// ===== BOUTON : C'EST VIDE =====
+document.getElementById("bouton-vide").addEventListener("click", async function () {
+
+    const { error } = await supabaseClient
+        .from("distributeurs")
+        .update({ etat: "vide" })
+        .eq("latitude", parseFloat(lat))
+        .eq("longitude", parseFloat(lng));
+
+    if (error) {
+        console.error("Erreur Supabase :", error);
+        alert("Erreur pendant l'enregistrement");
+        return;
+    }
+
     document.getElementById("etat").textContent = "VIDE";
     document.getElementById("icone-etat").textContent = "🔴";
+
+    alert("✅ Statut VIDE enregistré !");
 });
-
-
 </script>
 </body>
 </html>
