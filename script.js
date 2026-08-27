@@ -225,8 +225,25 @@ map.on('click', (e) => {
     const latitudeSignalement = e.latlng.lat;
     const longitudeSignalement = e.latlng.lng;
 
-    L.marker([latitudeSignalement, longitudeSignalement])
-        .addTo(map)
-        .bindPopup("➕ Emplacement du distributeur à confirmer")
-        .openPopup();
+  const marqueurSignalement = L.marker([latitudeSignalement, longitudeSignalement])
+    .addTo(map);
+
+marqueurSignalement.bindPopup(`
+    <div style="text-align:center;">
+        <strong>➕ Nouveau distributeur</strong>
+        <br><br>
+        Est-ce bien ici ?
+        <br><br>
+
+        <button onclick="confirmerSignalement(${latitudeSignalement}, ${longitudeSignalement})"
+            style="padding:10px 14px;background:#0B8F3C;color:white;border:none;border-radius:8px;font-weight:bold;">
+            ✅ Confirmer
+        </button>
+
+        <button onclick="annulerSignalement()"
+            style="padding:10px 14px;background:white;color:#333;border:1px solid #ccc;border-radius:8px;font-weight:bold;margin-left:5px;">
+            ❌ Annuler
+        </button>
+    </div>
+`).openPopup();
 });
