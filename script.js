@@ -247,3 +247,16 @@ marqueurSignalement.bindPopup(`
     </div>
 `).openPopup();
 });
+function annulerSignalement() {
+    map.closePopup();
+
+    map.eachLayer((layer) => {
+        if (
+            layer instanceof L.Marker &&
+            layer.getPopup() &&
+            layer.getPopup().getContent().includes("Nouveau distributeur")
+        ) {
+            map.removeLayer(layer);
+        }
+    });
+}
