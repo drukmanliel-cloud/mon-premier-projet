@@ -169,7 +169,7 @@ map.fitBounds(limites, {
 }); 
 
 }
-           L.marker(f[latitude, longitude], { icon: iconeUtilisateur })
+          L.marker([latitude, longitude], { icon: iconeUtilisateur })
                 .addTo(map)
                 .bindPopup("📍 Vous êtes ici");
         },
