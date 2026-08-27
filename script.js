@@ -98,15 +98,20 @@ console.log(distributeurs.length + " distributeurs chargés depuis Supabase");
 
 let marqueurPlusProche = null;
 let distanceMin = Infinity;
+let distributeurPleinPlusProche = null;
+let distancePleinMin = Infinity;
 distributeurs.forEach(distributeur => {
     const distance = map.distance(
         [latitude, longitude],
         [distributeur.lat, distributeur.lng]
-    );
-
-    if (distance < distanceMin) {
+if (distance < distanceMin) {
     distanceMin = distance;
     distributeurLePlusProche = distributeur;
+}
+
+if (distributeur.etat === "PLEIN" && distance < distancePleinMin) {
+    distancePleinMin = distance;
+    distributeurPleinPlusProche = distributeur;
 }
 
     if (distance <= 5000) {
@@ -142,6 +147,10 @@ const iconeEtat = L.divIcon({
 );
     }
 });
+       if (distributeurPleinPlusProche) {
+    distributeurLePlusProche = distributeurPleinPlusProche;
+    distanceMin = distancePleinMin;
+}         
     if (distributeurLePlusProche) {
 const iconeDistributeurProche = L.divIcon({
     className: 'icone-distributeur-proche',
