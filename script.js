@@ -110,7 +110,18 @@ distributeurs.forEach(distributeur => {
 }
 
     if (distance <= 5000) {
-        L.marker([distributeur.lat, distributeur.lng])
+      const couleurMarqueur =
+    distributeur.etat === "PLEIN" ? "#22c55e" :
+    distributeur.etat === "VIDE" ? "#ef4444" :
+    "#a78bfa";
+
+const iconeEtat = L.divIcon({
+    className: "",
+    html: "<div style='width:22px;height:22px;border-radius:50%;background:" + couleurMarqueur + ";border:3px solid white;box-shadow:0 0 6px rgba(0,0,0,0.4);'></div>",
+    iconSize: [22, 22],
+    iconAnchor: [11, 11]
+});
+       L.marker([distributeur.lat, distributeur.lng], { icon: iconeEtat })
             .addTo(map)
            .bindPopup(
     "🐾 <strong>" + distributeur.nom + "</strong>" +
