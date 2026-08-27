@@ -21,6 +21,7 @@ L.marker([48.8566, 2.3522])
 
 // Géolocalisation de l'utilisateur
 const boutonLocalisation = document.querySelector('button');
+const boutonSignaler = document.getElementById('bouton-signaler');
 
 boutonLocalisation.addEventListener('click', () => {
     if (!navigator.geolocation) {
