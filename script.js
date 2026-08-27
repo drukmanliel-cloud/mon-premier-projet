@@ -209,3 +209,6 @@ marqueurPlusProche.openPopup();
         }
     );
 });
+boutonSignaler.addEventListener('click', () => {
+    alert("Cliquez maintenant sur la carte à l'endroit où se trouve le distributeur.");
+});
