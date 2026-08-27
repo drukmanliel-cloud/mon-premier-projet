@@ -260,3 +260,28 @@ function annulerSignalement() {
         }
     });
 }
+
+async function confirmerSignalement(latitude, longitude) {
+   const { data, error } = await supabase
+    .from('distributeurs')
+    .insert([
+        {
+    latitude: latitude,
+    longitude: longitude,
+    etat: 'A_VERIFIER',
+    type: 'signalement_utilisateur'
+}
+]);
+
+if (error) {
+    console.error("Erreur Supabase :", error);
+    alert("❌ Le distributeur n'a pas pu être enregistré.");
+    return;
+}
+
+map.closePopup();
+
+alert("✅ Merci ! Le distributeur a bien été signalé.");
+
+console.log("Nouveau distributeur signalé :", latitude, longitude);
+}
