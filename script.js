@@ -97,6 +97,7 @@ const distributeurs = toutesLesLignes
 console.log(distributeurs.length + " distributeurs chargés depuis Supabase");
 
 let marqueurPlusProche = null;
+let distanceMin = Infinity;
 distributeurs.forEach(distributeur => {
     const distance = map.distance(
         [latitude, longitude],
