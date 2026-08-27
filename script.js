@@ -116,8 +116,18 @@ distributeurs.forEach(distributeur => {
     "🐾 <strong>" + distributeur.nom + "</strong>" +
     "<br>📍 " + distributeur.emplacement +
     "<br>" + (distributeur.etat === "PLEIN" ? "🟢" : distributeur.etat === "VIDE" ? "🔴" : "⚪") +
-" <strong>" + distributeur.etat + "</strong>" +
-    "<br>📏 Distance : " + Math.round(distance) + " m"
+    " <strong>" + distributeur.etat + "</strong>" +
+    "<br>📏 Distance : " + Math.round(distance) + " m" +
+    "<br><br>" +
+    "<a href='fiche-distributeur.html?emplacement=" +
+    encodeURIComponent(distributeur.emplacement) +
+    "&lat=" + distributeur.lat +
+    "&lng=" + distributeur.lng +
+    "&etat=" + encodeURIComponent(distributeur.etat) +
+    "' style='display:inline-block;padding:10px 14px;background:#ffffff;color:#0B8F3C;text-decoration:none;border:2px solid #0B8F3C;border-radius:8px;font-weight:bold;margin-right:8px;'>📄 Voir la fiche</a>" +
+    "<a href='https://www.google.com/maps/dir/?api=1&destination=" +
+    distributeur.lat + "," + distributeur.lng +
+    "' target='_blank' style='display:inline-block;padding:10px 14px;background:#0B8F3C;color:white;text-decoration:none;border-radius:8px;font-weight:bold;'>🚶 Y aller</a>"
 );
     }
 });
