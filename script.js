@@ -174,7 +174,7 @@ marqueurPlusProche = L.marker(
 ).addTo(map);
 
 marqueurPlusProche.bindPopup(
-    "⭐ <strong>Distributeur le plus proche</strong>" +
+    "⭐ <strong>Distributeur avec sacs le plus proche</strong>" +
     "<br>📍 " + distributeurLePlusProche.emplacement +
     "<br>" + (distributeurLePlusProche.etat === "PLEIN" ? "🟢" : distributeurLePlusProche.etat === "VIDE" ? "🔴" : "⚪") + " <strong>" + distributeurLePlusProche.etat + "</strong>" +
     "<br>📏 Distance : " + Math.round(distanceMin) + " m" +
