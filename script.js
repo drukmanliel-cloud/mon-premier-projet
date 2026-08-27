@@ -210,6 +210,23 @@ marqueurPlusProche.openPopup();
         }
     );
 });
+let modeSignalement = false;
+
 boutonSignaler.addEventListener('click', () => {
+    modeSignalement = true;
     alert("Cliquez maintenant sur la carte à l'endroit où se trouve le distributeur.");
+});
+
+map.on('click', (e) => {
+    if (!modeSignalement) return;
+
+    modeSignalement = false;
+
+    const latitudeSignalement = e.latlng.lat;
+    const longitudeSignalement = e.latlng.lng;
+
+    L.marker([latitudeSignalement, longitudeSignalement])
+        .addTo(map)
+        .bindPopup("➕ Emplacement du distributeur à confirmer")
+        .openPopup();
 });
