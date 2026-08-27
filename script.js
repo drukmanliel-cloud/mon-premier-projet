@@ -177,7 +177,7 @@ map.fitBounds(limites, {
     padding: [80, 80],
     maxZoom: 16
 }); 
-
+marqueurPlusProche.openPopup();
 }
           L.marker([latitude, longitude], { icon: iconeUtilisateur })
                 .addTo(map)
