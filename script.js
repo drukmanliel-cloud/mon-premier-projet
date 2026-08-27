@@ -104,6 +104,7 @@ distributeurs.forEach(distributeur => {
     const distance = map.distance(
         [latitude, longitude],
         [distributeur.lat, distributeur.lng]
+     );   
 if (distance < distanceMin) {
     distanceMin = distance;
     distributeurLePlusProche = distributeur;
