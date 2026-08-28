@@ -70,6 +70,27 @@
   </header>
 
   <main>
+    <div id="connexion-admin" class="bloc">
+    <h2 class="title">🔐 Connexion administrateur</h2>
+
+    <input
+        type="email"
+        id="admin-email"
+        placeholder="Adresse email"
+    >
+
+    <input
+        type="password"
+        id="admin-password"
+        placeholder="Mot de passe"
+    >
+
+    <button onclick="connexionAdmin()">
+        Se connecter
+    </button>
+
+    <p id="message-connexion"></p>
+</div>
 
     <div class="bloc">
 
@@ -150,7 +171,100 @@ const SUPABASE_KEY = "sb_publishable_Ce2x-kfGFq7hZ7f4yH7C2A_-EuAEtEj";
       zone.innerHTML = "❌ Impossible de charger les signalements.";
     }
   }
+  async function validerSignalement(id) {
+    const token = localStorage.getItem("toutou_admin_token");
 
+    if (!token) {
+        alert("❌ Vous devez être connecté en administrateur.");
+        return;
+    }
+
+    try {
+        const reponse = await fetch(
+            SUPABASE_URL + "/rest/v1/distributeurs?id=eq." + id,
+            {
+                method: "PATCH",
+                headers: {
+                    "apikey": SUPABASE_KEY,
+                    "Authorization": "Bearer " + token,
+                    "Content-Type": "application/json",
+                    "Prefer": "return=minimal"
+                },
+                body: JSON.stringify({
+                    etat: "PLEIN"
+                })
+            }
+        );
+
+        if (!reponse.ok) {
+            const erreur = await reponse.text();
+            console.error("Erreur validation :", erreur);
+            alert("❌ Impossible de valider le distributeur.");
+            return;
+        }
+
+        alert("✅ Distributeur validé.");
+
+        chargerSignalements();
+
+    } catch (erreur) {
+        console.error(erreur);
+        alert("❌ Une erreur est survenue.");
+    }
+}
+async function connexionAdmin() {
+    const email = document.getElementById("admin-email").value;
+    const password = document.getElementById("admin-password").value;
+    const message = document.getElementById("message-connexion");
+
+    message.textContent = "Connexion en cours...";
+
+    try {
+        const reponse = await fetch(
+            SUPABASE_URL + "/auth/v1/token?grant_type=password",
+            {
+                method: "POST",
+                headers: {
+                    "apikey": SUPABASE_KEY,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            }
+        );
+
+        const donnees = await reponse.json();
+
+        if (!reponse.ok) {
+            console.error(donnees);
+            message.textContent = "❌ Email ou mot de passe incorrect.";
+            return;
+        }
+
+        localStorage.setItem(
+            "toutou_admin_token",
+            donnees.access_token
+        );
+
+        message.textContent = "✅ Connexion réussie.";
+
+        document.getElementById("connexion-admin").style.display = "none";
+    } catch (erreur) {
+        console.error(erreur);
+        message.textContent = "❌ Impossible de se connecter.";
+    }
+}
+  function verifierConnexionAdmin() {
+    const token = localStorage.getItem("toutou_admin_token");
+
+    if (token) {
+        document.getElementById("connexion-admin").style.display = "none";
+    }
+}
+
+verifierConnexionAdmin();
   chargerSignalements();
 </script>
 </body>
