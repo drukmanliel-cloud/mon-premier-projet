@@ -1,6 +1,7 @@
 // Création de la carte Toutou Map
 const map = L.map('map').setView([48.8566, 2.3522], 13);
-
+const SUPABASE_URL = "https://lhkmboiukbjqdgminwod.supabase.co";
+const SUPABASE_KEY = "sb_publishable_Ce2x-kfGFq7hZ7f4yH7C2A_-EuAEtEj";
 // Ajout de la carte OpenStreetMap
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
