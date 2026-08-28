@@ -133,7 +133,15 @@ const SUPABASE_KEY = "sb_publishable_Ce2x-kfGFq7hZ7f4yH7C2A_-EuAEtEj";
 
           Latitude : ${signalement.latitude}<br>
           Longitude : ${signalement.longitude}<br>
-          Statut : <strong>${signalement.etat}</strong>
+          Statut : <strong>${signalement.etat}</strong><br><br>
+
+<button onclick="validerSignalement(${signalement.id})">
+  ✅ Valider le distributeur
+</button>
+
+<button onclick="refuserSignalement(${signalement.id})">
+  ❌ Refuser
+</button>
         </div>
       `).join("");
 
