@@ -87,6 +87,63 @@
     </div>
 
   </main>
+<script>
+  const SUPABASE_URL = "https://lhkmboiukbjqdgminwod.supabase.co";
+const SUPABASE_KEY = "sb_publishable_Ce2x-kfGFq7hZ7f4yH7C2A_-EuAEtEj";
 
+  async function chargerSignalements() {
+    const zone = document.querySelector(".message");
+
+    try {
+      const reponse = await fetch(
+        SUPABASE_URL +
+        "/rest/v1/distributeurs" +
+        "?select=id,created_at,latitude,longitude,etat,type" +
+        "&etat=eq.A_VERIFIER" +
+        "&type=eq.signalement_utilisateur" +
+        "&order=created_at.desc",
+        {
+          headers: {
+            "apikey": SUPABASE_KEY,
+            "Authorization": "Bearer " + SUPABASE_KEY
+          }
+        }
+      );
+
+      if (!reponse.ok) {
+        throw new Error(await reponse.text());
+      }
+
+      const signalements = await reponse.json();
+
+      if (signalements.length === 0) {
+        zone.innerHTML = "✅ Aucun signalement à vérifier.";
+        return;
+      }
+
+      zone.innerHTML = signalements.map(signalement => `
+        <div style="
+          background:white;
+          padding:18px;
+          margin-bottom:12px;
+          border-radius:10px;
+          border:1px solid #ddd;
+        ">
+          <strong>📍 Signalement #${signalement.id}</strong><br><br>
+
+          Latitude : ${signalement.latitude}<br>
+          Longitude : ${signalement.longitude}<br>
+          Statut : <strong>${signalement.etat}</strong>
+        </div>
+      `).join("");
+
+    } catch (erreur) {
+      console.error(erreur);
+      zone.innerHTML = "❌ Impossible de charger les signalements.";
+    }
+  }
+
+  chargerSignalements();
+</script>
 </body>
 </html>
