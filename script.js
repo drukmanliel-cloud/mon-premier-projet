@@ -262,26 +262,40 @@ function annulerSignalement() {
 }
 
 async function confirmerSignalement(latitude, longitude) {
-   const { data, error } = await supabase
-    .from('distributeurs')
-    .insert([
+
+    const reponse = await fetch(
+        SUPABASE_URL + "/rest/v1/distributeurs",
         {
-    latitude: latitude,
-    longitude: longitude,
-    etat: 'A_VERIFIER',
-    type: 'signalement_utilisateur'
+            method: "POST",
+            headers: {
+                "apikey": SUPABASE_KEY,
+                "Authorization": "Bearer " + SUPABASE_KEY,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                latitude: latitude,
+                longitude: longitude,
+                etat: "A_VERIFIER",
+                type: "signalement_utilisateur"
+            })
+        }
+    );
+
+    if (!reponse.ok) {
+        const erreur = await reponse.text();
+        console.error("Erreur Supabase :", erreur);
+        alert("❌ Le distributeur n'a pas pu être enregistré.");
+        return;
+    }
+
+    map.closePopup();
+
+    alert("✅ Merci ! Le distributeur a bien été signalé.");
+
+    console.log(
+        "Nouveau distributeur signalé :",
+        latitude,
+        longitude
+    );
 }
-]);
 
-if (error) {
-    console.error("Erreur Supabase :", error);
-    alert("❌ Le distributeur n'a pas pu être enregistré.");
-    return;
-}
-
-map.closePopup();
-
-alert("✅ Merci ! Le distributeur a bien été signalé.");
-
-console.log("Nouveau distributeur signalé :", latitude, longitude);
-}
