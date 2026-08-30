@@ -230,7 +230,7 @@ return adresseSimplifiee || donnees.display_name || "Adresse non disponible";
 
                 <br><br>
 
-                <button onclick="validerSignalement(${signalement.id})">
+                <button onclick="validerSignalement(${signalement.id}, ${signalement.latitude}, ${signalement.longitude})">
                     ✅ Valider le distributeur
                 </button>
 
@@ -250,8 +250,9 @@ zone.innerHTML = cartes.join("");
       zone.innerHTML = "❌ Impossible de charger les signalements.";
     }
   }
-  async function validerSignalement(id) {
+  async function validerSignalement(id, latitude, longitude) {
     const token = localStorage.getItem("toutou_admin_token");
+    const adresse = await obtenirAdresse(latitude, longitude);
 
     if (!token) {
         alert("❌ Vous devez être connecté en administrateur.");
@@ -270,8 +271,9 @@ zone.innerHTML = cartes.join("");
                     "Prefer": "return=minimal"
                 },
                 body: JSON.stringify({
-                    etat: "PLEIN"
-                })
+    etat: "PLEIN",
+    emplacement: adresse
+})
             }
         );
 
