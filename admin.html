@@ -212,6 +212,62 @@ const SUPABASE_KEY = "sb_publishable_Ce2x-kfGFq7hZ7f4yH7C2A_-EuAEtEj";
         alert("❌ Une erreur est survenue.");
     }
 }
+  async function refuserSignalement(id) {
+    const token = localStorage.getItem("toutou_admin_token");
+
+    if (!token) {
+        alert("❌ Vous devez être connecté en administrateur.");
+        return;
+    }
+
+    const confirmation = confirm(
+        "Voulez-vous vraiment refuser ce signalement ?"
+    );
+
+    if (!confirmation) {
+        return;
+    }
+
+    try {
+        const reponse = await fetch(
+            SUPABASE_URL + "/rest/v1/distributeurs?id=eq." + id,
+            {
+                method: "PATCH",
+                headers: {
+                    "apikey": SUPABASE_KEY,
+                    "Authorization": "Bearer " + token,
+                    "Content-Type": "application/json",
+                    "Prefer": "return=minimal"
+                },
+                body: JSON.stringify({
+                    etat: "REFUSE"
+                })
+            }
+        );
+
+        if (reponse.status === 401) {
+            localStorage.removeItem("toutou_admin_token");
+            alert("🔐 Votre session a expiré. Veuillez vous reconnecter.");
+            location.reload();
+            return;
+        }
+
+        if (!reponse.ok) {
+            const erreur = await reponse.text();
+            console.error("Erreur refus :", erreur);
+            alert("❌ Impossible de refuser le signalement.");
+            return;
+        }
+
+        alert("❌ Signalement refusé.");
+
+        chargerSignalements();
+
+    } catch (erreur) {
+        console.error(erreur);
+        alert("❌ Une erreur est survenue.");
+    }
+}
 async function connexionAdmin() {
     const email = document.getElementById("admin-email").value;
     const password = document.getElementById("admin-password").value;
