@@ -271,8 +271,9 @@ zone.innerHTML = cartes.join("");
                     "Prefer": "return=minimal"
                 },
                 body: JSON.stringify({
-    etat: "PLEIN",
-    emplacement: adresse
+  etat: "PLEIN",
+  emplacement: adresse,
+  derniere_verification: new Date().toISOString()
 })
             }
         );
