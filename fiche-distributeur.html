@@ -67,7 +67,10 @@
     <span id="icone-etat">🟢</span>
     <span id="etat"></span>
 </p>
-
+<p>
+  🕒 Dernière vérification :
+  <span id="derniere-verification">Non renseignée</span>
+</p>
         <p>💩 Distributeur de sacs à crottes</p>
 <p><strong>Vous êtes devant ce distributeur ?</strong></p>
 <p>Aidez les autres utilisateurs :</p>
@@ -97,10 +100,23 @@ const emplacement = params.get("emplacement");
 const etat = params.get("etat");
 const lat = params.get("lat");
 const lng = params.get("lng");
+const derniereVerification = params.get("verification");
 
 document.getElementById("emplacement").textContent = emplacement || "Non renseigné";
 document.getElementById("nom-distributeur").textContent = emplacement || "Non renseigné";
 document.getElementById("etat").textContent = etat || "Non renseigné";
+ if (derniereVerification) {
+  const date = new Date(derniereVerification);
+
+  document.getElementById("derniere-verification").textContent =
+    date.toLocaleString("fr-FR", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit"
+    });
+}   
 const iconeEtat = document.getElementById("icone-etat");
 
 if (etat === "PLEIN") {
