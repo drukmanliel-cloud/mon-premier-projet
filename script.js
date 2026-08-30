@@ -146,6 +146,7 @@ const iconeEtat = L.divIcon({
     "&lat=" + distributeur.lat +
     "&lng=" + distributeur.lng +
     "&etat=" + encodeURIComponent(distributeur.etat) +
+     "&verification=" + encodeURIComponent(distributeur.derniere_verification || "") +     
     "' style='display:inline-block;padding:10px 14px;background:#ffffff;color:#0B8F3C;text-decoration:none;border:2px solid #0B8F3C;border-radius:8px;font-weight:bold;margin-right:8px;'>📄 Voir la fiche</a>" +
     "<a href='https://www.google.com/maps/dir/?api=1&destination=" +
     distributeur.lat + "," + distributeur.lng +
