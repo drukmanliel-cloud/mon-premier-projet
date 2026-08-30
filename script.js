@@ -53,7 +53,7 @@ while (true) {
     const reponse = await fetch(
         SUPABASE_URL +
         "/rest/v1/distributeurs" +
-       "?select=osm_id,latitude,longitude,city_name,emplacement,etat" +
+       "?select=osm_id,latitude,longitude,city_name,emplacement,etat,derniere_verification" +
         "&limit=" + limite +
         "&offset=" + offset,
         {
@@ -97,6 +97,7 @@ const distributeurs = toutesLesLignes
         etat: distributeur.etat
             ? distributeur.etat.toUpperCase()
             : "À VÉRIFIER"
+        derniere_verification: distributeur.derniere_verification,
     }));
 
 console.log(distributeurs.length + " distributeurs chargés depuis Supabase");
