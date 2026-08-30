@@ -53,7 +53,7 @@ while (true) {
     const reponse = await fetch(
         SUPABASE_URL +
         "/rest/v1/distributeurs" +
-        "?select=osm_id,latitude,longitude,city_name,etat" +
+       "?select=osm_id,latitude,longitude,city_name,emplacement,etat" +
         "&limit=" + limite +
         "&offset=" + offset,
         {
@@ -85,7 +85,10 @@ const distributeurs = toutesLesLignes
     )
     .map(distributeur => ({
         nom: "Distributeur Toutou Map",
-        emplacement: distributeur.city_name || "Emplacement non renseigné",
+       emplacement:
+    distributeur.emplacement ||
+    distributeur.city_name ||
+    "Emplacement non renseigné",
         lat: parseFloat(distributeur.latitude),
         lng: parseFloat(distributeur.longitude),
 
