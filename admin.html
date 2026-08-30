@@ -123,7 +123,42 @@ async function obtenirAdresse(latitude, longitude) {
 
         const donnees = await reponse.json();
 
-        return donnees.display_name || "Adresse non disponible";
+const adresse = donnees.address || {};
+
+const rue =
+    adresse.road ||
+    adresse.pedestrian ||
+    adresse.footway ||
+    adresse.place ||
+    "";
+
+const numero = adresse.house_number || "";
+
+const codePostal = adresse.postcode || "";
+
+const ville =
+    adresse.city ||
+    adresse.town ||
+    adresse.village ||
+    adresse.municipality ||
+    "";
+
+const ligneRue = [numero, rue]
+    .filter(Boolean)
+    .join(" ");
+
+const ligneVille = [codePostal, ville]
+    .filter(Boolean)
+    .join(" ");
+
+const adresseSimplifiee = [
+    ligneRue,
+    ligneVille
+]
+    .filter(Boolean)
+    .join(", ");
+
+return adresseSimplifiee || donnees.display_name || "Adresse non disponible";
 
     } catch (erreur) {
         console.error("Erreur adresse :", erreur);
