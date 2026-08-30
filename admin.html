@@ -342,11 +342,19 @@ zone.innerHTML = cartes.join("");
         }
 
         if (!reponse.ok) {
-            const erreur = await reponse.text();
-            console.error("Erreur refus :", erreur);
-            alert("❌ Impossible de refuser le signalement.");
-            return;
-        }
+  const erreur = await reponse.text();
+  console.error("Erreur refus :", erreur);
+
+  if (reponse.status === 401 || erreur.includes("JWT expired")) {
+    localStorage.removeItem("toutou_admin_token");
+    alert("🔐 Votre session a expiré. Veuillez vous reconnecter.");
+    location.reload();
+    return;
+  }
+
+  alert("❌ Impossible de refuser le signalement.");
+  return;
+}
 
         alert("❌ Signalement refusé.");
 
