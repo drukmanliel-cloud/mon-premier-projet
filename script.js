@@ -96,7 +96,7 @@ const distributeurs = toutesLesLignes
         // Le reste de ton code utilise PLEIN/VIDE en majuscules.
         etat: distributeur.etat
             ? distributeur.etat.toUpperCase()
-            : "À VÉRIFIER"
+            : "À VÉRIFIER",
         derniere_verification: distributeur.derniere_verification,
     }));
 
