@@ -100,6 +100,7 @@ const emplacement = params.get("emplacement");
 const etat = params.get("etat");
 const lat = params.get("lat");
 const lng = params.get("lng");
+const id = params.get("id");
 const derniereVerification = params.get("verification");
 
 document.getElementById("emplacement").textContent = emplacement || "Non renseigné";
@@ -151,8 +152,7 @@ document.getElementById("bouton-plein").addEventListener("click", async function
         etat: "plein",
         derniere_verification: new Date().toISOString()
     })
-    .eq("latitude", parseFloat(lat))
-    .eq("longitude", parseFloat(lng))
+    .eq("id", parseInt(id))
     .select();
 
 console.log("Lignes modifiées :", data);
