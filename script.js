@@ -53,7 +53,7 @@ while (true) {
     const reponse = await fetch(
         SUPABASE_URL +
         "/rest/v1/distributeurs" +
-       "?select=osm_id,latitude,longitude,city_name,emplacement,etat,derniere_verification" +
+      "?select=id,osm_id,latitude,longitude,city_name,emplacement,etat,derniere_verification" +
         "&limit=" + limite +
         "&offset=" + offset,
         {
@@ -84,6 +84,7 @@ const distributeurs = toutesLesLignes
         distributeur.longitude !== null
     )
     .map(distributeur => ({
+        id: distributeur.id,
         nom: "Distributeur Toutou Map",
        emplacement:
     distributeur.emplacement ||
@@ -144,6 +145,7 @@ const iconeEtat = L.divIcon({
     "<br><br>" +
     "<a href='fiche-distributeur.html?emplacement=" +
     encodeURIComponent(distributeur.emplacement) +
+    "&id=" + distributeur.id +    
     "&lat=" + distributeur.lat +
     "&lng=" + distributeur.lng +
     "&etat=" + encodeURIComponent(distributeur.etat) +
