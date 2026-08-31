@@ -165,10 +165,21 @@ console.log("Erreur Supabase :", error);
         return;
     }
 
-    document.getElementById("etat").textContent = "PLEIN";
-    document.getElementById("icone-etat").textContent = "🟢";
+   document.getElementById("etat").textContent = "PLEIN";
+document.getElementById("icone-etat").textContent = "🟢";
 
-    alert("✅ Statut PLEIN enregistré !");
+const maintenant = new Date();
+
+document.getElementById("derniere-verification").textContent =
+    maintenant.toLocaleString("fr-FR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+    });
+
+alert("✅ Statut PLEIN enregistré !");
 });
 
 
