@@ -64,15 +64,57 @@
       Aidez la communauté en nous indiquant son emplacement.
     </p>
 
-    <button type="button">
-      📍 Utiliser ma position
-    </button>
+    <button type="button" id="bouton-position">
+  📍 Utiliser ma position
+</button>
+
+<p id="message-position"></p>
 
     <a class="retour" href="index.html">
       ← Retour à Toutou Map
     </a>
 
   </div>
+<script>
+  const boutonPosition = document.getElementById("bouton-position");
+  const messagePosition = document.getElementById("message-position");
 
+  boutonPosition.addEventListener("click", () => {
+
+    if (!navigator.geolocation) {
+      messagePosition.textContent =
+        "❌ La géolocalisation n'est pas disponible sur cet appareil.";
+      return;
+    }
+
+    messagePosition.textContent = "📍 Recherche de votre position...";
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+
+        messagePosition.innerHTML =
+          "✅ Position trouvée.<br>" +
+          "Latitude : " + latitude + "<br>" +
+          "Longitude : " + longitude;
+      },
+
+      (erreur) => {
+        console.error(erreur);
+
+        messagePosition.textContent =
+          "❌ Impossible de récupérer votre position.";
+      },
+
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0
+      }
+    );
+
+  });
+</script>
 </body>
 </html>
