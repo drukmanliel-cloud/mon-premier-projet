@@ -84,6 +84,8 @@
   const boutonPosition = document.getElementById("bouton-position");
   const messagePosition = document.getElementById("message-position");
   const boutonConfirmer = document.getElementById("bouton-confirmer");
+  let latitudeTrouvee = null;
+let longitudeTrouvee = null;
 
   boutonPosition.addEventListener("click", () => {
 
@@ -97,14 +99,14 @@
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        const latitude = position.coords.latitude;
-        const longitude = position.coords.longitude;
+        latitudeTrouvee = position.coords.latitude;
+longitudeTrouvee = position.coords.longitude;
         boutonConfirmer.style.display = "inline-block";
 
-        messagePosition.innerHTML =
-          "✅ Position trouvée.<br>" +
-          "Latitude : " + latitude + "<br>" +
-          "Longitude : " + longitude;
+       messagePosition.innerHTML =
+  "✅ Position trouvée.<br>" +
+  "Latitude : " + latitudeTrouvee + "<br>" +
+  "Longitude : " + longitudeTrouvee;
       },
 
       (erreur) => {
