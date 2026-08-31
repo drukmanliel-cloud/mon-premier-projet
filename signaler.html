@@ -69,6 +69,11 @@
 </button>
 
 <p id="message-position"></p>
+    <button type="button" id="bouton-confirmer" style="display:none;">
+  ✅ Confirmer ce distributeur
+</button>
+
+<p id="message-confirmation"></p>
 
     <a class="retour" href="index.html">
       ← Retour à Toutou Map
@@ -78,6 +83,7 @@
 <script>
   const boutonPosition = document.getElementById("bouton-position");
   const messagePosition = document.getElementById("message-position");
+  const boutonConfirmer = document.getElementById("bouton-confirmer");
 
   boutonPosition.addEventListener("click", () => {
 
@@ -93,6 +99,7 @@
       (position) => {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
+        boutonConfirmer.style.display = "inline-block";
 
         messagePosition.innerHTML =
           "✅ Position trouvée.<br>" +
