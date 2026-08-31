@@ -80,12 +80,21 @@
     </a>
 
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   const boutonPosition = document.getElementById("bouton-position");
   const messagePosition = document.getElementById("message-position");
   const boutonConfirmer = document.getElementById("bouton-confirmer");
+  const messageConfirmation = document.getElementById("message-confirmation");
   let latitudeTrouvee = null;
 let longitudeTrouvee = null;
+const SUPABASE_URL = "https://lhkmboiukbjqdgminwod.supabase.co";
+
+const SUPABASE_KEY = "sb_publishable_Ce2x-kfGFq7hZ7f4yH7C2A_-EuAEtEj";
+ const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+); 
 
   boutonPosition.addEventListener("click", () => {
 
@@ -124,6 +133,42 @@ longitudeTrouvee = position.coords.longitude;
     );
 
   });
+  boutonConfirmer.addEventListener("click", async () => {
+
+  if (latitudeTrouvee === null || longitudeTrouvee === null) {
+    messageConfirmation.textContent =
+      "❌ Position introuvable. Utilisez d'abord votre position.";
+    return;
+  }
+
+  boutonConfirmer.disabled = true;
+  messageConfirmation.textContent = "⏳ Enregistrement du signalement...";
+
+  const { data, error } = await supabaseClient
+    .from("distributeurs")
+    .insert({
+      emplacement: "Distributeur signalé par un utilisateur",
+      latitude: latitudeTrouvee,
+      longitude: longitudeTrouvee,
+      etat: "a_verifier"
+    })
+    .select();
+
+  console.log("Nouveau distributeur :", data);
+  console.log("Erreur Supabase :", error);
+
+  if (error) {
+    messageConfirmation.textContent =
+      "❌ Impossible d'enregistrer le distributeur.";
+    boutonConfirmer.disabled = false;
+    return;
+  }
+
+  messageConfirmation.textContent =
+    "✅ Merci ! Le distributeur a bien été signalé et sera vérifié.";
+
+  boutonConfirmer.style.display = "none";
+});
 </script>
 </body>
 </html>
