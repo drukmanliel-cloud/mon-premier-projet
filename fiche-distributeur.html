@@ -179,10 +179,9 @@ document.getElementById("bouton-vide").addEventListener("click", async function 
         .from("distributeurs")
         .update({
     etat: "vide",
-    derniere_verification: new Date()
+   derniere_verification: new Date().toISOString()
 })
-        .eq("latitude", parseFloat(lat))
-        .eq("longitude", parseFloat(lng));
+        .eq("id", parseInt(id))
 
     if (error) {
         console.error("Erreur Supabase :", error);
