@@ -158,6 +158,31 @@
       `;
 
       listeSignalements.appendChild(bloc);
+      const boutonValider = bloc.querySelector(".valider");
+
+boutonValider.addEventListener("click", async () => {
+  boutonValider.disabled = true;
+  boutonValider.textContent = "⏳ Validation...";
+
+  const { error } = await supabaseClient
+    .from("distributeurs")
+    .update({
+      etat: "PLEIN",
+      derniere_verification: new Date().toISOString()
+    })
+    .eq("id", signalement.id)
+    .eq("etat", "signalement_utilisateur");
+
+  if (error) {
+    console.error("Erreur validation :", error);
+    boutonValider.disabled = false;
+    boutonValider.textContent = "✅ Valider";
+    alert("❌ Impossible de valider ce distributeur.");
+    return;
+  }
+
+  await chargerSignalements();
+});
     });
   }
 
