@@ -149,7 +149,7 @@ document.getElementById("bouton-plein").addEventListener("click", async function
    const { data, error } = await supabaseClient
     .from("distributeurs")
     .update({
-        etat: "plein",
+        etat: "PLEIN",
         derniere_verification: new Date().toISOString()
     })
     .eq("id", parseInt(id))
@@ -189,7 +189,7 @@ document.getElementById("bouton-vide").addEventListener("click", async function 
     const { error } = await supabaseClient
         .from("distributeurs")
         .update({
-    etat: "vide",
+    etat: "VIDE",
    derniere_verification: new Date().toISOString()
 })
         .eq("id", parseInt(id))
