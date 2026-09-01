@@ -107,13 +107,49 @@ const SUPABASE_KEY = "sb_publishable_Ce2x-kfGFq7hZ7f4yH7C2A_-EuAEtEj";
     messagePosition.textContent = "📍 Recherche de votre position...";
 
     navigator.geolocation.getCurrentPosition(
-      (position) => {
+     async (position) => {
         latitudeTrouvee = position.coords.latitude;
 longitudeTrouvee = position.coords.longitude;
+       let adresseTrouvee = "Adresse non trouvée";
+
+try {
+  const reponse = await fetch(
+    `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitudeTrouvee}&lon=${longitudeTrouvee}&zoom=18&addressdetails=1`
+  );
+
+  const resultat = await reponse.json();
+  const adresse = resultat.address || {};
+
+  const rue = adresse.road ||
+              adresse.pedestrian ||
+              adresse.footway ||
+              adresse.residential ||
+              "";
+
+  const numero = adresse.house_number || "";
+
+  const ville = adresse.city ||
+                adresse.town ||
+                adresse.village ||
+                adresse.municipality ||
+                "";
+
+  adresseTrouvee =
+    [numero, rue].filter(Boolean).join(" ") +
+    (ville ? ", " + ville : "");
+
+  if (!adresseTrouvee.trim()) {
+    adresseTrouvee = resultat.display_name || "Adresse non trouvée";
+  }
+
+} catch (erreur) {
+  console.error("Erreur récupération adresse :", erreur);
+}
         boutonConfirmer.style.display = "inline-block";
 
-       messagePosition.innerHTML =
+ messagePosition.innerHTML =
   "✅ Position trouvée.<br>" +
+  "📍 " + adresseTrouvee + "<br>" +
   "Latitude : " + latitudeTrouvee + "<br>" +
   "Longitude : " + longitudeTrouvee;
       },
