@@ -133,9 +133,10 @@
     }
 
     if (!data || data.length === 0) {
-      message.textContent = "✅ Aucun signalement en attente.";
-      return;
-    }
+  listeSignalements.innerHTML = "";
+  message.textContent = "✅ Aucun signalement en attente.";
+  return;
+}
 
     message.textContent = "📍 " + data.length + " signalement(s) en attente.";
 
