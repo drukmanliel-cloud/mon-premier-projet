@@ -5,7 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Administration - Toutou Map</title>
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
 
+<script
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -151,6 +158,10 @@
         📍 ${signalement.emplacement || "Emplacement non renseigné"}<br>
         Latitude : ${signalement.latitude}<br>
         Longitude : ${signalement.longitude}<br>
+        <div
+  id="map-${signalement.id}"
+  style="height: 300px; margin-top: 15px; margin-bottom: 15px; border-radius: 15px;">
+</div>
 
         <div class="actions">
           <button class="valider">✅ Valider</button>
@@ -159,6 +170,20 @@
       `;
 
       listeSignalements.appendChild(bloc);
+      const map = L.map(`map-${signalement.id}`).setView(
+  [signalement.latitude, signalement.longitude],
+  18
+);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 19,
+  attribution: '&copy; OpenStreetMap'
+}).addTo(map);
+
+L.marker([
+  signalement.latitude,
+  signalement.longitude
+]).addTo(map);
       const boutonValider = bloc.querySelector(".valider");
 
 boutonValider.addEventListener("click", async () => {
