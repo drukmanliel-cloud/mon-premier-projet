@@ -184,6 +184,31 @@ boutonValider.addEventListener("click", async () => {
 
   await chargerSignalements();
 });
+      const boutonRefuser = bloc.querySelector(".refuser");
+
+boutonRefuser.addEventListener("click", async () => {
+  boutonRefuser.disabled = true;
+  boutonRefuser.textContent = "⏳ Refus...";
+
+  const { error } = await supabaseClient
+    .from("distributeurs")
+    .update({
+      etat: "REFUSE",
+      derniere_verification: new Date().toISOString()
+    })
+    .eq("id", signalement.id)
+    .eq("etat", "signalement_utilisateur");
+
+  if (error) {
+    console.error("Erreur refus :", error);
+    boutonRefuser.disabled = false;
+    boutonRefuser.textContent = "❌ Refuser";
+    alert("❌ Impossible de refuser ce distributeur.");
+    return;
+  }
+
+  await chargerSignalements();
+});
     });
   }
 
