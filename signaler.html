@@ -87,7 +87,8 @@
   const boutonConfirmer = document.getElementById("bouton-confirmer");
   const messageConfirmation = document.getElementById("message-confirmation");
   let latitudeTrouvee = null;
-let longitudeTrouvee = null;
+  let longitudeTrouvee = null;
+ let adresseTrouvee = "Adresse non trouvée";
 const SUPABASE_URL = "https://lhkmboiukbjqdgminwod.supabase.co";
 
 const SUPABASE_KEY = "sb_publishable_Ce2x-kfGFq7hZ7f4yH7C2A_-EuAEtEj";
@@ -183,7 +184,7 @@ try {
   const { data, error } = await supabaseClient
     .from("distributeurs")
     .insert({
-      emplacement: "Distributeur signalé par un utilisateur",
+      emplacement: adresseTrouvee,
       latitude: latitudeTrouvee,
       longitude: longitudeTrouvee,
       etat: "signalement_utilisateur"
