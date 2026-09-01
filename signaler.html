@@ -111,7 +111,7 @@ const SUPABASE_KEY = "sb_publishable_Ce2x-kfGFq7hZ7f4yH7C2A_-EuAEtEj";
      async (position) => {
         latitudeTrouvee = position.coords.latitude;
 longitudeTrouvee = position.coords.longitude;
-       let adresseTrouvee = "Adresse non trouvée";
+      adresseTrouvee = "Adresse non trouvée";
 
 try {
   const reponse = await fetch(
