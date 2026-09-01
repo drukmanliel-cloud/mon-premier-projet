@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Administration - Toutou Map</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f5ff;
+      margin: 0;
+      padding: 30px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      background: white;
+      border-radius: 25px;
+      padding: 35px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      color: #079b45;
+      margin-top: 0;
+    }
+
+    .subtitle {
+      color: #555;
+      margin-bottom: 30px;
+    }
+
+    .signalement {
+      border: 1px solid #ddd;
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 15px;
+    }
+
+    .signalement strong {
+      color: #079b45;
+    }
+
+    .actions {
+      margin-top: 15px;
+      display: flex;
+      gap: 10px;
+    }
+
+    button {
+      border: none;
+      border-radius: 10px;
+      padding: 12px 18px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .valider {
+      background: #079b45;
+      color: white;
+    }
+
+    .refuser {
+      background: #e53935;
+      color: white;
+    }
+
+    #message {
+      margin: 20px 0;
+      font-weight: bold;
+    }
+
+    .retour {
+      display: inline-block;
+      margin-top: 20px;
+      color: #079b45;
+      font-weight: bold;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>🐾 Toutou Map — Administration</h1>
+
+    <p class="subtitle">
+      Signalements de distributeurs en attente de vérification
+    </p>
+
+    <div id="message">
+      ⏳ Chargement des signalements...
+    </div>
+
+    <div id="liste-signalements"></div>
+
+    <a class="retour" href="index.html">
+      ← Retour à Toutou Map
+    </a>
+
+  </div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+  const SUPABASE_URL = "https://lhkmboiukbjqdgminwod.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_Ce2x-kfGFq7hZ7f4yH7C2A_-EuAEtEj";
+
+  const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+  const message = document.getElementById("message");
+  const listeSignalements = document.getElementById("liste-signalements");
+
+  async function chargerSignalements() {
+    const { data, error } = await supabaseClient
+      .from("distributeurs")
+      .select("id, created_at, emplacement, latitude, longitude, etat")
+      .eq("etat", "signalement_utilisateur")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error("Erreur Supabase :", error);
+      message.textContent = "❌ Impossible de charger les signalements.";
+      return;
+    }
+
+    if (!data || data.length === 0) {
+      message.textContent = "✅ Aucun signalement en attente.";
+      return;
+    }
+
+    message.textContent = "📍 " + data.length + " signalement(s) en attente.";
+
+    listeSignalements.innerHTML = "";
+
+    data.forEach((signalement) => {
+      const bloc = document.createElement("div");
+      bloc.className = "signalement";
+
+      bloc.innerHTML = `
+        <strong>ID ${signalement.id}</strong><br>
+        📍 ${signalement.emplacement || "Emplacement non renseigné"}<br>
+        Latitude : ${signalement.latitude}<br>
+        Longitude : ${signalement.longitude}<br>
+
+        <div class="actions">
+          <button class="valider">✅ Valider</button>
+          <button class="refuser">❌ Refuser</button>
+        </div>
+      `;
+
+      listeSignalements.appendChild(bloc);
+    });
+  }
+
+  chargerSignalements();
+</script>
+</body>
+</html>
