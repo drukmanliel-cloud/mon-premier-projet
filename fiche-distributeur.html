@@ -33,15 +33,29 @@
         }
 
         .bouton {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 14px 20px;
-            background: #0B8F3C;
-            color: white;
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: bold;
-        }
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+    padding: 14px 22px;
+    background: #0B8F3C;
+    color: white;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    box-shadow: 0 4px 12px rgba(11, 143, 60, 0.20);
+}
+
+.bouton:hover {
+    background: #087a33;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(11, 143, 60, 0.28);
+}
 
         .retour {
             display: block;
