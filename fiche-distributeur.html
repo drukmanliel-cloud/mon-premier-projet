@@ -56,7 +56,40 @@
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(11, 143, 60, 0.28);
 }
+.signalement {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+}
 
+#bouton-plein,
+#bouton-vide {
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#bouton-plein {
+    background: #e9f8ef;
+    color: #0B8F3C;
+    border: 2px solid #0B8F3C;
+}
+
+#bouton-vide {
+    background: #fff0f0;
+    color: #d93025;
+    border: 2px solid #d93025;
+}
+
+#bouton-plein:hover,
+#bouton-vide:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
         .retour {
             display: block;
             margin-top: 30px;
