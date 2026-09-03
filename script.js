@@ -53,7 +53,7 @@ while (true) {
     const reponse = await fetch(
         SUPABASE_URL +
         "/rest/v1/distributeurs" +
-      "?select=id,osm_id,latitude,longitude,city_name,emplacement,etat,derniere_verification" +
+      "?select=id,osm_id,latitude,longitude,city_name,emplacement,etat,derniere_verification,confirmations" +
         "&limit=" + limite +
         "&offset=" + offset,
         {
@@ -95,10 +95,11 @@ const distributeurs = toutesLesLignes
 
         // Supabase contient plein/vide en minuscules.
         // Le reste de ton code utilise PLEIN/VIDE en majuscules.
-        etat: distributeur.etat
-            ? distributeur.etat.toUpperCase()
-            : "À VÉRIFIER",
-        derniere_verification: distributeur.derniere_verification,
+       etat: distributeur.etat
+  ? distributeur.etat.toUpperCase()
+  : "À VERIFIER",
+derniere_verification: distributeur.derniere_verification,
+confirmations: distributeur.confirmations ?? 0,
     }));
 
 console.log(distributeurs.length + " distributeurs chargés depuis Supabase");
