@@ -347,9 +347,17 @@ async function confirmerDistributeur(id, confirmationsActuelles) {
                 "Content-Type": "application/json",
                 "Prefer": "return=representation"
             },
-            body: JSON.stringify({
-                confirmations: nouvellesConfirmations
-            })
+           body: JSON.stringify(
+    nouvellesConfirmations >= 3
+        ? {
+            confirmations: nouvellesConfirmations,
+            etat: "PLEIN",
+            derniere_verification: new Date().toISOString()
+          }
+        : {
+            confirmations: nouvellesConfirmations
+          }
+)
         }
     );
 
