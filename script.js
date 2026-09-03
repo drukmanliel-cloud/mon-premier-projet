@@ -158,10 +158,15 @@ const iconeEtat = L.divIcon({
            .bindPopup(
     "🐾 <strong>" + distributeur.nom + "</strong>" +
     "<br>📍 " + distributeur.emplacement +
-    "<br>" + (distributeur.etat === "PLEIN" ? "🟢" : distributeur.etat === "VIDE" ? "🔴" : "⚪") +
-    " <strong>" + distributeur.etat + "</strong>" +
-    "<br>📏 Distance : " + Math.round(distance) + " m" +
-    "<br><br>" +
+   "<br>" + (distributeur.etat === "PLEIN" ? "🟢" : distributeur.etat === "VIDE" ? "🔴" : "🟣") +
+" <strong>" + distributeur.etat + "</strong>" +
+"<br>📏 Distance : " + Math.round(distance) + " m" +
+
+(distributeur.etat === "À VÉRIFIER"
+  ? "<br>🐾 Confirmations : <strong>" + distributeur.confirmations + " / 3</strong>"
+  : "") +
+
+"<br><br>" +
     "<a href='fiche-distributeur.html?emplacement=" +
     encodeURIComponent(distributeur.emplacement) +
     "&id=" + distributeur.id +    
