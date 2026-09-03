@@ -354,11 +354,16 @@ async function confirmerDistributeur(id, confirmationsActuelles) {
     );
 
     if (!reponse.ok) {
-        const erreur = await reponse.text();
-        console.error("Erreur confirmation :", erreur);
-        alert("❌ Impossible d'enregistrer la confirmation.");
-        return;
-    }
+    const erreur = await reponse.text();
+    console.error("Erreur confirmation :", erreur);
+
+    alert(
+        "❌ Impossible d'enregistrer la confirmation.\n\n" +
+        "Erreur Supabase : " + erreur
+    );
+
+    return;
+}
 
     alert("✅ Merci ! Confirmation enregistrée.");
 
