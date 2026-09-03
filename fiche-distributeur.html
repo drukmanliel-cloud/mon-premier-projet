@@ -97,6 +97,16 @@
             text-decoration: none;
             font-weight: bold;
         }
+  #message-statut {
+    margin-top: 15px;
+    min-height: 24px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.message-succes {
+    color: #0B8F3C;
+}
     </style>
 </head>
 
@@ -126,7 +136,7 @@
     <button id="bouton-plein">🟢 Il y a des sacs</button>
     <button id="bouton-vide">🔴 Il est vide</button>
 </div>
-
+<p id="message-statut"></p>
       <a class="bouton"
     id="bouton-itineraire"
     href="#"
@@ -229,7 +239,9 @@ const url = new URL(window.location.href);
 url.searchParams.set("etat", "PLEIN");
 url.searchParams.set("verification", maintenant.toISOString());
 window.history.replaceState({}, "", url);
-alert("✅ Statut PLEIN enregistré !");
+const messageStatut = document.getElementById("message-statut");
+messageStatut.textContent = "✅ Merci ! Le distributeur est signalé avec des sacs.";
+messageStatut.className = "message-succes";
 });
 
 
@@ -267,7 +279,9 @@ const url = new URL(window.location.href);
 url.searchParams.set("etat", "VIDE");
 url.searchParams.set("verification", maintenantVide.toISOString());
 window.history.replaceState({}, "", url);
-alert("✅ Statut VIDE enregistré !");
+const messageStatut = document.getElementById("message-statut");
+messageStatut.textContent = "✅ Merci ! Le distributeur est signalé vide.";
+messageStatut.className = "message-succes";
 });
 </script>
 </body>
