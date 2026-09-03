@@ -107,7 +107,25 @@ let marqueurPlusProche = null;
 let distanceMin = Infinity;
 let distributeurPleinPlusProche = null;
 let distancePleinMin = Infinity;
+const DUREE_VALIDITE_STATUT = 24 * 60 * 60 * 1000; // 24 heures
+const maintenant = Date.now();
 distributeurs.forEach(distributeur => {
+    // Un statut PLEIN ou VIDE n'est considéré fiable que pendant 24 heures
+if (!distributeur.derniere_verification) {
+    distributeur.etat = "À VÉRIFIER";
+} else {
+    const dateVerification = new Date(
+        distributeur.derniere_verification
+    ).getTime();
+
+    const dateInvalide = Number.isNaN(dateVerification);
+    const tropAncienne =
+        maintenant - dateVerification > DUREE_VALIDITE_STATUT;
+
+    if (dateInvalide || tropAncienne) {
+        distributeur.etat = "À VÉRIFIER";
+    }
+}
     const distance = map.distance(
         [latitude, longitude],
         [distributeur.lat, distributeur.lng]
