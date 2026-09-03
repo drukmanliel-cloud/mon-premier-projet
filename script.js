@@ -165,7 +165,9 @@ const iconeEtat = L.divIcon({
 (distributeur.etat === "À VÉRIFIER"
   ? "<br>🐾 Confirmations : <strong>" + distributeur.confirmations + " / 3</strong>"
   : "") +
-
+(distributeur.etat === "À VÉRIFIER"
+  ? "<br><button class='btn-confirmer-distributeur'>✅ Je confirme ce distributeur</button>"
+  : "") +
 "<br><br>" +
     "<a href='fiche-distributeur.html?emplacement=" +
     encodeURIComponent(distributeur.emplacement) +
