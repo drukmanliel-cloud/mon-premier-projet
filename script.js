@@ -335,6 +335,12 @@ async function confirmerSignalement(latitude, longitude) {
     );
 }
 async function confirmerDistributeur(id, confirmationsActuelles) {
+   const cleConfirmation = "toutoumap_confirmation_" + id;
+
+if (localStorage.getItem(cleConfirmation)) {
+    alert("🐾 Vous avez déjà confirmé ce distributeur. Merci !");
+    return;
+}
     const nouvellesConfirmations = confirmationsActuelles + 1;
 
     const reponse = await fetch(
@@ -372,7 +378,7 @@ async function confirmerDistributeur(id, confirmationsActuelles) {
 
     return;
 }
-
+localStorage.setItem(cleConfirmation, "oui");
     alert("✅ Merci ! Confirmation enregistrée.");
 
     window.location.reload();
