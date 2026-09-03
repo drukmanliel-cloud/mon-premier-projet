@@ -166,7 +166,9 @@ const iconeEtat = L.divIcon({
   ? "<br>🐾 Confirmations : <strong>" + distributeur.confirmations + " / 3</strong>"
   : "") +
 (distributeur.etat === "À VÉRIFIER"
-  ? "<br><button class='btn-confirmer-distributeur'>✅ Je confirme ce distributeur</button>"
+  ? "<br><button class='btn-confirmer-distributeur' onclick='confirmerDistributeur(" +
+  distributeur.id + ", " + distributeur.confirmations +
+  ")'>✅ Je confirme ce distributeur</button>"
   : "") +
 "<br><br>" +
     "<a href='fiche-distributeur.html?emplacement=" +
@@ -331,5 +333,35 @@ async function confirmerSignalement(latitude, longitude) {
         latitude,
         longitude
     );
+}
+async function confirmerDistributeur(id, confirmationsActuelles) {
+    const nouvellesConfirmations = confirmationsActuelles + 1;
+
+    const reponse = await fetch(
+        SUPABASE_URL + "/rest/v1/distributeurs?id=eq." + id,
+        {
+            method: "PATCH",
+            headers: {
+                "apikey": SUPABASE_KEY,
+                "Authorization": "Bearer " + SUPABASE_KEY,
+                "Content-Type": "application/json",
+                "Prefer": "return=representation"
+            },
+            body: JSON.stringify({
+                confirmations: nouvellesConfirmations
+            })
+        }
+    );
+
+    if (!reponse.ok) {
+        const erreur = await reponse.text();
+        console.error("Erreur confirmation :", erreur);
+        alert("❌ Impossible d'enregistrer la confirmation.");
+        return;
+    }
+
+    alert("✅ Merci ! Confirmation enregistrée.");
+
+    window.location.reload();
 }
 
