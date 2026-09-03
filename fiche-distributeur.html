@@ -209,7 +209,7 @@ document.getElementById("bouton-plein").addEventListener("click", async function
         etat: "PLEIN",
         derniere_verification: new Date().toISOString()
     })
-    .eq("emplacement", emplacement)
+    .eq("id", parseInt(id))
     .select();
 
 console.log("Lignes modifiées :", data);
@@ -254,7 +254,7 @@ document.getElementById("bouton-vide").addEventListener("click", async function 
     etat: "VIDE",
    derniere_verification: new Date().toISOString()
 })
-        .eq("emplacement", emplacement)
+        .eq("id", parseInt(id))
 
     if (error) {
         console.error("Erreur Supabase :", error);
