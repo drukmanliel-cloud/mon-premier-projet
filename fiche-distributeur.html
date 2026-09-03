@@ -225,7 +225,10 @@ document.getElementById("derniere-verification").textContent =
         hour: "2-digit",
         minute: "2-digit"
     });
-
+const url = new URL(window.location.href);
+url.searchParams.set("etat", "PLEIN");
+url.searchParams.set("verification", maintenant.toISOString());
+window.history.replaceState({}, "", url);
 alert("✅ Statut PLEIN enregistré !");
 });
 
@@ -260,7 +263,10 @@ document.getElementById("derniere-verification").textContent =
         hour: "2-digit",
         minute: "2-digit"
     });
-
+const url = new URL(window.location.href);
+url.searchParams.set("etat", "VIDE");
+url.searchParams.set("verification", maintenantVide.toISOString());
+window.history.replaceState({}, "", url);
 alert("✅ Statut VIDE enregistré !");
 });
 </script>
