@@ -346,3 +346,25 @@ main section:first-child > p:first-child {
 .marqueur-distributeur-proche * {
     pointer-events: none !important;
 }
+
+/* Boutons principaux côte à côte */
+.actions-principales {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.actions-principales button {
+  margin: 0;
+}
+
+/* Sur téléphone : boutons l'un sous l'autre */
+@media (max-width: 700px) {
+  .actions-principales {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+}
