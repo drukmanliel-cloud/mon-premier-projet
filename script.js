@@ -85,7 +85,10 @@ const distributeurs = toutesLesLignes
     )
     .map(distributeur => ({
         id: distributeur.id,
-        adresse_manquante: !distributeur.emplacement,
+        adresse_manquante:
+    !distributeur.emplacement ||
+    distributeur.emplacement === "Distributeur signalé par un utilisateur" ||
+    distributeur.emplacement === "Emplacement non renseigné",
         nom: "Distributeur Toutou Map",
        emplacement:
     distributeur.emplacement ||
