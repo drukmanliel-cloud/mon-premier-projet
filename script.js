@@ -85,6 +85,7 @@ const distributeurs = toutesLesLignes
     )
     .map(distributeur => ({
         id: distributeur.id,
+        adresse_manquante: !distributeur.emplacement,
         nom: "Distributeur Toutou Map",
        emplacement:
     distributeur.emplacement ||
@@ -110,6 +111,8 @@ let distributeurPleinPlusProche = null;
 let distancePleinMin = Infinity;
 const DUREE_VALIDITE_STATUT = 24 * 60 * 60 * 1000; // 24 heures
 const maintenant = Date.now();
+         let adressesRecherchees = 0;
+const MAX_ADRESSES_PAR_CHARGEMENT = 3;       
 distributeurs.forEach(distributeur => {
     // Un statut PLEIN ou VIDE n'est considéré fiable que pendant 24 heures
 if (!distributeur.derniere_verification) {
@@ -142,6 +145,13 @@ if (distributeur.etat === "PLEIN" && distance < distancePleinMin) {
 }
 
     if (distance <= 5000) {
+        if (
+    distributeur.adresse_manquante &&
+    adressesRecherchees < MAX_ADRESSES_PAR_CHARGEMENT
+) {
+    adressesRecherchees++;
+           recupererAdresseDistributeur(distributeur); 
+}
       const couleurMarqueur =
     distributeur.etat === "PLEIN" ? "#22c55e" :
     distributeur.etat === "VIDE" ? "#ef4444" :
@@ -383,4 +393,74 @@ localStorage.setItem(cleConfirmation, "oui");
 
     window.location.reload();
 }
+async function recupererAdresseDistributeur(distributeur) {
+    try {
+        const reponse = await fetch(
+            "https://nominatim.openstreetmap.org/reverse?format=json&addressdetails=1&lat=" +
+            encodeURIComponent(distributeur.lat) +
+            "&lon=" +
+            encodeURIComponent(distributeur.lng)
+        );
 
+        if (!reponse.ok) {
+            return;
+        }
+
+        const data = await reponse.json();
+
+        if (!data || !data.address) {
+            return;
+        }
+
+        const adresse = data.address;
+
+        const rue =
+            adresse.road ||
+            adresse.pedestrian ||
+            adresse.path ||
+            adresse.residential ||
+            "Emplacement";
+
+        const codePostal = adresse.postcode || "";
+
+        const ville =
+            adresse.city ||
+            adresse.town ||
+            adresse.village ||
+            adresse.municipality ||
+            "";
+
+        const adresseCourte =
+            rue +
+            (codePostal ? ", " + codePostal : "") +
+            (ville ? " " + ville : "");
+
+        distributeur.emplacement = adresseCourte;
+        distributeur.adresse_manquante = false;
+
+        const sauvegarde = await fetch(
+            SUPABASE_URL + "/rest/v1/distributeurs?id=eq." + distributeur.id,
+            {
+                method: "PATCH",
+                headers: {
+                    "apikey": SUPABASE_KEY,
+                    "Authorization": "Bearer " + SUPABASE_KEY,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    emplacement: adresseCourte
+                })
+            }
+        );
+
+        if (!sauvegarde.ok) {
+            console.error(
+                "Erreur sauvegarde adresse :",
+                await sauvegarde.text()
+            );
+        }
+
+    } catch (error) {
+        console.error("Erreur récupération adresse :", error);
+    }
+}
