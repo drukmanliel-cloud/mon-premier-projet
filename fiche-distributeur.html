@@ -161,6 +161,39 @@ const id = params.get("id");
 const derniereVerification = params.get("verification");
 
 document.getElementById("emplacement").textContent = emplacement || "Non renseigné";
+    async function chargerAdresseSiManquante() {
+    const emplacementManquant =
+        !emplacement ||
+        emplacement === "Emplacement non renseigné" ||
+        emplacement === "Non renseigné";
+
+    if (!emplacementManquant || !lat || !lng) {
+        return;
+    }
+
+    try {
+        const reponse = await fetch(
+            "https://nominatim.openstreetmap.org/reverse?format=json&lat=" +
+            encodeURIComponent(lat) +
+            "&lon=" +
+            encodeURIComponent(lng)
+        );
+
+        if (!reponse.ok) {
+            return;
+        }
+
+        const data = await reponse.json();
+
+        if (data && data.display_name) {
+            document.getElementById("emplacement").textContent = data.display_name;
+        }
+    } catch (error) {
+        console.error("Erreur récupération adresse :", error);
+    }
+}
+
+chargerAdresseSiManquante();
 document.getElementById("nom-distributeur").textContent = "Distributeur Toutou Map";
 document.getElementById("etat").textContent = etat || "Non renseigné";
  if (derniereVerification) {
