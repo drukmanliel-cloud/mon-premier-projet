@@ -115,7 +115,16 @@ let distancePleinMin = Infinity;
 const DUREE_VALIDITE_STATUT = 24 * 60 * 60 * 1000; // 24 heures
 const maintenant = Date.now();
          let adressesRecherchees = 0;
-const MAX_ADRESSES_PAR_CHARGEMENT = 3;       
+const MAX_ADRESSES_PAR_CHARGEMENT = 3;  
+ distributeurs.sort((a, b) => {
+    const aPrioritaire =
+        a.emplacement === "Distributeur signalé par un utilisateur";
+
+    const bPrioritaire =
+        b.emplacement === "Distributeur signalé par un utilisateur";
+
+    return Number(bPrioritaire) - Number(aPrioritaire);
+});               
 distributeurs.forEach(distributeur => {
     // Un statut PLEIN ou VIDE n'est considéré fiable que pendant 24 heures
 if (!distributeur.derniere_verification) {
