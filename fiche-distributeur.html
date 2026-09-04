@@ -202,7 +202,15 @@ const supabaseClient = window.supabase.createClient(
 
 // ===== BOUTON : IL Y A DES SACS =====
 document.getElementById("bouton-plein").addEventListener("click", async function () {
+const cleVote = "toutoumap_vote_statut_" + id;
 
+const dernierVote = localStorage.getItem(cleVote);
+const dureeBlocage = 60 * 60 * 1000; // 1 heure
+
+if (dernierVote && Date.now() - new Date(dernierVote).getTime() < dureeBlocage) {
+    alert("🐾 Vous avez déjà signalé l'état de ce distributeur il y a moins d'une heure.");
+    return;
+}
    const { data, error } = await supabaseClient
     .from("distributeurs")
     .update({
@@ -221,7 +229,7 @@ console.log("Erreur Supabase :", error);
         alert("Erreur pendant l'enregistrement");
         return;
     }
-
+localStorage.setItem(cleVote, new Date().toISOString());
    document.getElementById("etat").textContent = "PLEIN";
 document.getElementById("icone-etat").textContent = "🟢";
 
@@ -247,7 +255,15 @@ messageStatut.className = "message-succes";
 
 // ===== BOUTON : C'EST VIDE =====
 document.getElementById("bouton-vide").addEventListener("click", async function () {
+const cleVote = "toutoumap_vote_statut_" + id;
 
+const dernierVote = localStorage.getItem(cleVote);
+const dureeBlocage = 60 * 60 * 1000; // 1 heure
+
+if (dernierVote && Date.now() - new Date(dernierVote).getTime() < dureeBlocage) {
+    alert("🐾 Vous avez déjà signalé l'état de ce distributeur il y a moins d'une heure.");
+    return;
+}
     const { error } = await supabaseClient
         .from("distributeurs")
         .update({
@@ -261,7 +277,7 @@ document.getElementById("bouton-vide").addEventListener("click", async function 
         alert("Erreur pendant l'enregistrement");
         return;
     }
-
+localStorage.setItem(cleVote, new Date().toISOString());
     document.getElementById("etat").textContent = "VIDE";
 document.getElementById("icone-etat").textContent = "🔴";
 
