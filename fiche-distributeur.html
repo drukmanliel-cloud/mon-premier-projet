@@ -209,6 +209,16 @@ document.getElementById("emplacement").textContent = emplacement || "Non renseig
         (ville ? " " + ville : "");
 
     document.getElementById("emplacement").textContent = adresseCourte;
+           const { error: erreurAdresse } = await supabaseClient
+    .from("distributeurs")
+    .update({
+        emplacement: adresseCourte
+    })
+    .eq("id", parseInt(id));
+
+if (erreurAdresse) {
+    console.error("Erreur enregistrement adresse :", erreurAdresse);
+}
 }
     } catch (error) {
         console.error("Erreur récupération adresse :", error);
