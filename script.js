@@ -381,8 +381,8 @@ if (localStorage.getItem(cleConfirmation)) {
     nouvellesConfirmations >= 3
         ? {
             confirmations: nouvellesConfirmations,
-            etat: "PLEIN",
-            derniere_verification: new Date().toISOString()
+            valide: true
+           
           }
         : {
             confirmations: nouvellesConfirmations
