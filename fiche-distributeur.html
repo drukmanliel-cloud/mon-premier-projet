@@ -185,9 +185,31 @@ document.getElementById("emplacement").textContent = emplacement || "Non renseig
 
         const data = await reponse.json();
 
-        if (data && data.display_name) {
-            document.getElementById("emplacement").textContent = data.display_name;
-        }
+       if (data && data.address) {
+    const adresse = data.address;
+
+    const rue =
+        adresse.road ||
+        adresse.pedestrian ||
+        adresse.path ||
+        adresse.residential ||
+        "Emplacement";
+
+    const codePostal = adresse.postcode || "";
+    const ville =
+        adresse.city ||
+        adresse.town ||
+        adresse.village ||
+        adresse.municipality ||
+        "";
+
+    const adresseCourte =
+        rue +
+        (codePostal ? ", " + codePostal : "") +
+        (ville ? " " + ville : "");
+
+    document.getElementById("emplacement").textContent = adresseCourte;
+}
     } catch (error) {
         console.error("Erreur récupération adresse :", error);
     }
