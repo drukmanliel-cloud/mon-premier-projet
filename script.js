@@ -53,7 +53,7 @@ while (true) {
     const reponse = await fetch(
         SUPABASE_URL +
         "/rest/v1/distributeurs" +
-      "?select=id,osm_id,latitude,longitude,city_name,emplacement,etat,derniere_verification,confirmations" +
+     "?select=id,osm_id,latitude,longitude,city_name,emplacement,etat,derniere_verification,confirmations,valide,type" +
         "&limit=" + limite +
         "&offset=" + offset,
         {
@@ -104,6 +104,8 @@ const distributeurs = toutesLesLignes
   : "À VERIFIER",
 derniere_verification: distributeur.derniere_verification,
 confirmations: distributeur.confirmations ?? 0,
+        valide: distributeur.valide ?? false,
+type: distributeur.type,
     }));
 
 console.log(distributeurs.length + " distributeurs chargés depuis Supabase");
@@ -184,10 +186,10 @@ const iconeEtat = L.divIcon({
 " <strong>" + distributeur.etat + "</strong>" +
 "<br>📏 Distance : " + Math.round(distance) + " m" +
 
-(distributeur.etat === "À VÉRIFIER"
+(!distributeur.valide
   ? "<br>🐾 Confirmations : <strong>" + distributeur.confirmations + " / 3</strong>"
   : "") +
-(distributeur.etat === "À VÉRIFIER"
+(!distributeur.valide
   ? "<br><button class='btn-confirmer-distributeur' onclick='confirmerDistributeur(" +
   distributeur.id + ", " + distributeur.confirmations +
   ")'>✅ Je confirme ce distributeur</button>"
