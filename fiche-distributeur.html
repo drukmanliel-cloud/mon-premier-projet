@@ -159,7 +159,45 @@ const lat = params.get("lat");
 const lng = params.get("lng");
 const id = params.get("id");
 const derniereVerification = params.get("verification");
+async function chargerDonneesDistributeur() {
+    if (!id) {
+        return;
+    }
 
+    const { data, error } = await supabaseClient
+        .from("distributeurs")
+        .select("emplacement, etat, derniere_verification")
+        .eq("id", parseInt(id))
+        .single();
+
+    if (error || !data) {
+        console.error("Erreur chargement distributeur :", error);
+        return;
+    }
+
+    if (data.emplacement) {
+        document.getElementById("emplacement").textContent = data.emplacement;
+    }
+
+    document.getElementById("etat").textContent =
+        data.etat ? data.etat.toUpperCase() : "À VÉRIFIER";
+
+    if (data.derniere_verification) {
+        const date = new Date(data.derniere_verification);
+
+        document.getElementById("derniere-verification").textContent =
+            date.toLocaleString("fr-FR", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit"
+            });
+    } else {
+        document.getElementById("derniere-verification").textContent =
+            "Non renseignée";
+    }
+}
 document.getElementById("emplacement").textContent = emplacement || "Non renseigné";
     async function chargerAdresseSiManquante() {
     const emplacementManquant =
@@ -263,7 +301,7 @@ const supabaseClient = window.supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
 );
-
+chargerDonneesDistributeur();
 
 // ===== BOUTON : IL Y A DES SACS =====
 document.getElementById("bouton-plein").addEventListener("click", async function () {
