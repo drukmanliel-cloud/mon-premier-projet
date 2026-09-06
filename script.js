@@ -243,6 +243,7 @@ marqueurPlusProche.bindPopup(
 "<br><br>" +
 "<a href='fiche-distributeur.html?emplacement=" +
 encodeURIComponent(distributeurLePlusProche.emplacement) +
+    "&id=" + distributeurLePlusProche.id +
 "&lat=" + distributeurLePlusProche.lat +
 "&lng=" + distributeurLePlusProche.lng +
 "&etat=" + encodeURIComponent(distributeurLePlusProche.etat) + "' style='display:inline-block;padding:10px 14px;background:#ffffff;color:#0B8F3C;text-decoration:none;border:2px solid #0B8F3C;border-radius:8px;font-weight:bold;margin-right:8px;'>📄 Voir la fiche</a>" +
