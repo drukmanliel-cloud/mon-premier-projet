@@ -192,10 +192,11 @@ boutonValider.addEventListener("click", async () => {
 
   const { error } = await supabaseClient
     .from("distributeurs")
-    .update({
-      etat: "PLEIN",
-      derniere_verification: new Date().toISOString()
-    })
+   .update({
+  etat: "PLEIN",
+  valide: true,
+  derniere_verification: new Date().toISOString()
+})
     .eq("id", signalement.id)
     .eq("etat", "signalement_utilisateur");
 
