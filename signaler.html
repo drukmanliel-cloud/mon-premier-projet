@@ -129,13 +129,7 @@ boutonCarte.addEventListener("click", () => {
                 attribution: "&copy; OpenStreetMap"
             }
         ).addTo(carteChoix);
-    }
-
-    setTimeout(() => {
-        carteChoix.invalidateSize();
-    }, 100);
-});
- carteChoix.on("click", async (e) => {
+     carteChoix.on("click", async (e) => {
     latitudeTrouvee = e.latlng.lat;
     longitudeTrouvee = e.latlng.lng;
     adresseTrouvee = "Adresse non trouvée";
@@ -154,6 +148,13 @@ boutonCarte.addEventListener("click", () => {
 
     boutonConfirmer.style.display = "inline-block";
 });
+    }
+
+    setTimeout(() => {
+        carteChoix.invalidateSize();
+    }, 100);
+});
+ 
   boutonPosition.addEventListener("click", () => {
 
     if (!navigator.geolocation) {
