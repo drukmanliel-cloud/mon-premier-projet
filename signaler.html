@@ -114,7 +114,27 @@ const SUPABASE_KEY = "sb_publishable_Ce2x-kfGFq7hZ7f4yH7C2A_-EuAEtEj";
   SUPABASE_URL,
   SUPABASE_KEY
 ); 
+boutonCarte.addEventListener("click", () => {
+    carteSignalement.style.display = "block";
 
+    if (!carteChoix) {
+        carteChoix = L.map("carte-signalement").setView(
+            [48.8096, 2.4398],
+            15
+        );
+
+        L.tileLayer(
+            "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+            {
+                attribution: "&copy; OpenStreetMap"
+            }
+        ).addTo(carteChoix);
+    }
+
+    setTimeout(() => {
+        carteChoix.invalidateSize();
+    }, 100);
+});
   boutonPosition.addEventListener("click", () => {
 
     if (!navigator.geolocation) {
