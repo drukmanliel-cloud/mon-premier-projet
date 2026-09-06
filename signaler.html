@@ -135,6 +135,25 @@ boutonCarte.addEventListener("click", () => {
         carteChoix.invalidateSize();
     }, 100);
 });
+ carteChoix.on("click", async (e) => {
+    latitudeTrouvee = e.latlng.lat;
+    longitudeTrouvee = e.latlng.lng;
+    adresseTrouvee = "Adresse non trouvée";
+
+    if (marqueurChoix) {
+        marqueurChoix.setLatLng(e.latlng);
+    } else {
+        marqueurChoix = L.marker(e.latlng).addTo(carteChoix);
+    }
+
+    messagePosition.textContent =
+        "📍 Position choisie : " +
+        latitudeTrouvee.toFixed(6) +
+        ", " +
+        longitudeTrouvee.toFixed(6);
+
+    boutonConfirmer.style.display = "inline-block";
+});
   boutonPosition.addEventListener("click", () => {
 
     if (!navigator.geolocation) {
