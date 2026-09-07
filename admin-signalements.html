@@ -118,10 +118,25 @@
   const SUPABASE_URL = "https://lhkmboiukbjqdgminwod.supabase.co";
   const SUPABASE_KEY = "sb_publishable_Ce2x-kfGFq7hZ7f4yH7C2A_-EuAEtEj";
 
-  const supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  );
+ const adminToken = localStorage.getItem("toutou_admin_token");
+
+if (!adminToken) {
+  alert("🔒 Vous devez être connecté en administrateur.");
+  window.location.href = "admin.html";
+  throw new Error("Administrateur non connecté");
+}
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY,
+  {
+    global: {
+      headers: {
+        Authorization: "Bearer " + adminToken
+      }
+    }
+  }
+);
 
   const message = document.getElementById("message");
   const listeSignalements = document.getElementById("liste-signalements");
