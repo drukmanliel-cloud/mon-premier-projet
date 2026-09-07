@@ -92,7 +92,7 @@
     <p id="message-connexion"></p>
 </div>
 
-    <div class="bloc">
+   <div id="zone-admin" class="bloc" style="display:none;">
 
       <h2 class="titre">📍 Signalements à vérifier</h2>
 
@@ -405,6 +405,8 @@ async function connexionAdmin() {
         message.textContent = "✅ Connexion réussie.";
 
         document.getElementById("connexion-admin").style.display = "none";
+      document.getElementById("zone-admin").style.display = "block";
+      chargerSignalements();
     } catch (erreur) {
         console.error(erreur);
         message.textContent = "❌ Impossible de se connecter.";
@@ -414,12 +416,16 @@ async function connexionAdmin() {
     const token = localStorage.getItem("toutou_admin_token");
 
     if (token) {
-        document.getElementById("connexion-admin").style.display = "none";
-    }
+  document.getElementById("connexion-admin").style.display = "none";
+  document.getElementById("zone-admin").style.display = "block";
+}
 }
 
 verifierConnexionAdmin();
+
+if (localStorage.getItem("toutou_admin_token")) {
   chargerSignalements();
+}
 </script>
 </body>
 </html>
