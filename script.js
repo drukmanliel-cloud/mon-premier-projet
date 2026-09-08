@@ -440,27 +440,25 @@ async function recupererAdresseDistributeur(distributeur) {
         distributeur.emplacement = adresseCourte;
         distributeur.adresse_manquante = false;
 
-        const sauvegarde = await fetch(
-            SUPABASE_URL + "/rest/v1/distributeurs?id=eq." + distributeur.id,
-            {
-                method: "PATCH",
-                headers: {
-                    "apikey": SUPABASE_KEY,
-                    "Authorization": "Bearer " + SUPABASE_KEY,
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    emplacement: adresseCourte
-                })
-            }
-        );
+        const idDistributeur = parseInt(distributeur.id);
 
-        if (!sauvegarde.ok) {
-            console.error(
-                "Erreur sauvegarde adresse :",
-                await sauvegarde.text()
-            );
-        }
+if (!Number.isInteger(idDistributeur)) {
+  console.error("ID distributeur invalide :", distributeur.id);
+  return;
+}
+
+const { error } = await supabaseClient.rpc(
+  "completer_emplacement",
+  {
+    p_id: idDistributeur,
+    p_emplacement: adresseCourte
+  }
+);
+
+if (error) {
+  console.error("Erreur sauvegarde adresse :", error);
+}
+         
 
     } catch (error) {
         console.error("Erreur récupération adresse :", error);
