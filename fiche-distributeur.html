@@ -314,15 +314,13 @@ if (dernierVote && Date.now() - new Date(dernierVote).getTime() < dureeBlocage) 
     alert("🐾 Vous avez déjà signalé l'état de ce distributeur il y a moins d'une heure.");
     return;
 }
-   const { data, error } = await supabaseClient
-    .from("distributeurs")
-    .update({
-        etat: "PLEIN",
-        derniere_verification: new Date().toISOString()
-    })
-    .eq("id", parseInt(id))
-    .select();
-
+  const { data, error } = await supabaseClient.rpc(
+    "signaler_etat",
+    {
+        p_id: parseInt(id),
+        p_etat: "PLEIN"
+    }
+);
 console.log("Lignes modifiées :", data);
 console.log("Erreur Supabase :", error);
         
@@ -367,13 +365,13 @@ if (dernierVote && Date.now() - new Date(dernierVote).getTime() < dureeBlocage) 
     alert("🐾 Vous avez déjà signalé l'état de ce distributeur il y a moins d'une heure.");
     return;
 }
-    const { error } = await supabaseClient
-        .from("distributeurs")
-        .update({
-    etat: "VIDE",
-   derniere_verification: new Date().toISOString()
-})
-        .eq("id", parseInt(id))
+    const { error } = await supabaseClient.rpc(
+    "signaler_etat",
+    {
+        p_id: parseInt(id),
+        p_etat: "VIDE"
+    }
+);
 
     if (error) {
         console.error("Erreur Supabase :", error);
