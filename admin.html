@@ -277,10 +277,11 @@ zone.innerHTML = cartes.join("");
                     "Content-Type": "application/json",
                     "Prefer": "return=minimal"
                 },
-                body: JSON.stringify({
-  etat: "PLEIN",
-  emplacement: adresse,
-  derniere_verification: new Date().toISOString()
+               body: JSON.stringify({
+    etat: "PLEIN",
+    emplacement: adresse,
+    valide: true,
+    derniere_verification: new Date().toISOString()
 })
             }
         );
