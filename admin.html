@@ -173,13 +173,12 @@ return adresseSimplifiee || donnees.display_name || "Adresse non disponible";
         SUPABASE_URL +
         "/rest/v1/distributeurs" +
         "?select=id,created_at,latitude,longitude,etat,type" +
-        "&etat=eq.A_VERIFIER" +
-        "&type=eq.signalement_utilisateur" +
-        "&order=created_at.desc",
+        "&etat=eq.signalement_utilisateur" +
+"&order=created_at.desc",
         {
           headers: {
             "apikey": SUPABASE_KEY,
-            "Authorization": "Bearer " + SUPABASE_KEY
+           "Authorization": "Bearer " + localStorage.getItem("toutou_admin_token")
           }
         }
       );
