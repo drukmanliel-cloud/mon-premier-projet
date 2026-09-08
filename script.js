@@ -79,10 +79,11 @@ while (true) {
 }
 
 const distributeurs = toutesLesLignes
-    .filter(distributeur =>
-        distributeur.latitude !== null &&
-        distributeur.longitude !== null
-    )
+  .filter(distributeur =>
+    distributeur.latitude !== null &&
+    distributeur.longitude !== null &&
+    (distributeur.etat || "").toUpperCase() !== "REFUSE"
+)
     .map(distributeur => ({
         id: distributeur.id,
         adresse_manquante:
