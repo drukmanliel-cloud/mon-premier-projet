@@ -184,9 +184,17 @@ return adresseSimplifiee || donnees.display_name || "Adresse non disponible";
       );
 
       if (!reponse.ok) {
-        throw new Error(await reponse.text());
-      }
+  const erreurTexte = await reponse.text();
 
+  if (reponse.status === 401 && erreurTexte.includes("JWT expired")) {
+    localStorage.removeItem("toutou_admin_token");
+    alert("🔒 Votre session administrateur a expiré. Merci de vous reconnecter.");
+    window.location.href = "admin.html";
+    return;
+  }
+
+  throw new Error(erreurTexte);
+}
       const signalements = await reponse.json();
 
       if (signalements.length === 0) {
