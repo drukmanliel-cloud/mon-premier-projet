@@ -361,50 +361,36 @@ async function confirmerSignalement(latitude, longitude) {
     );
 }
 async function confirmerDistributeur(id, confirmationsActuelles) {
-   const cleConfirmation = "toutoumap_confirmation_" + id;
+    const cleConfirmation = "toutoumap_confirmation_" + id;
 
-if (localStorage.getItem(cleConfirmation)) {
-    alert("🐾 Vous avez déjà confirmé ce distributeur. Merci !");
-    return;
-}
-    const nouvellesConfirmations = confirmationsActuelles + 1;
+    if (localStorage.getItem(cleConfirmation)) {
+        alert("🐾 Vous avez déjà confirmé ce distributeur. Merci !");
+        return;
+    }
 
-    const reponse = await fetch(
-        SUPABASE_URL + "/rest/v1/distributeurs?id=eq." + id,
+    const idDistributeur = parseInt(id);
+
+    if (!Number.isInteger(idDistributeur)) {
+        console.error("ID distributeur invalide :", id);
+        alert("❌ Impossible de confirmer ce distributeur.");
+        return;
+    }
+
+    const { data, error } = await supabaseClient.rpc(
+        "confirmer_distributeur",
         {
-            method: "PATCH",
-            headers: {
-                "apikey": SUPABASE_KEY,
-                "Authorization": "Bearer " + SUPABASE_KEY,
-                "Content-Type": "application/json",
-                "Prefer": "return=representation"
-            },
-           body: JSON.stringify(
-    nouvellesConfirmations >= 3
-        ? {
-            confirmations: nouvellesConfirmations,
-            valide: true
-           
-          }
-        : {
-            confirmations: nouvellesConfirmations
-          }
-)
+            p_id: idDistributeur
         }
     );
 
-    if (!reponse.ok) {
-    const erreur = await reponse.text();
-    console.error("Erreur confirmation :", erreur);
+    if (error) {
+        console.error("Erreur confirmation :", error);
+        alert("❌ Impossible d'enregistrer la confirmation.");
+        return;
+    }
 
-    alert(
-        "❌ Impossible d'enregistrer la confirmation.\n\n" +
-        "Erreur Supabase : " + erreur
-    );
+    localStorage.setItem(cleConfirmation, "oui");
 
-    return;
-}
-localStorage.setItem(cleConfirmation, "oui");
     alert("✅ Merci ! Confirmation enregistrée.");
 
     window.location.reload();
