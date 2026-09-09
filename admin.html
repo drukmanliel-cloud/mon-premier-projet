@@ -95,6 +95,9 @@
    <div id="zone-admin" class="bloc" style="display:none;">
 
       <h2 class="titre">📍 Signalements à vérifier</h2>
+     <button onclick="deconnexionAdmin()" style="margin-bottom:20px;">
+    🚪 Se déconnecter
+</button>
 
       <p>
         Cette page permettra de contrôler les nouveaux
@@ -419,6 +422,16 @@ async function connexionAdmin() {
         console.error(erreur);
         message.textContent = "❌ Impossible de se connecter.";
     }
+}
+  function deconnexionAdmin() {
+    localStorage.removeItem("toutou_admin_token");
+
+    document.getElementById("zone-admin").style.display = "none";
+    document.getElementById("connexion-admin").style.display = "block";
+
+    document.getElementById("admin-email").value = "";
+    document.getElementById("admin-password").value = "";
+    document.getElementById("message-connexion").textContent = "✅ Vous êtes déconnecté.";
 }
   function verifierConnexionAdmin() {
     const token = localStorage.getItem("toutou_admin_token");
