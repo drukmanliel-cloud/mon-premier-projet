@@ -525,16 +525,22 @@ main section:first-child > p:first-child {
   color: #1f2430;
 }
 
+.home-page .intro-home p {
+    font-size: 20px;
+    line-height: 1.5;
+}
+
 .home-page .intro-home .intro-title {
-  font-size: 19px;
-  font-weight: 700;
-  color: #0B8F3C;
-  margin-bottom: 6px;
+    font-size: 25px;
+    font-weight: 700;
+    color: #0B8F3C;
+    margin-bottom: 10px;
 }
 
 .home-page .intro-home .intro-fun {
-  font-weight: 600;
-  margin-top: 7px;
+    font-size: 21px;
+    font-weight: 600;
+    margin-top: 10px;
 }
 
 /* Adaptation téléphone */
