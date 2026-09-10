@@ -794,3 +794,23 @@ margin-right: auto;
         line-height: 1.4;
     }
 }
+/* ===== TITRE PRINCIPAL PLUS IMPACTANT ===== */
+
+.home-page .intro-home .intro-title {
+    font-size: 48px;
+    line-height: 1.08;
+    font-weight: 800;
+    color: #0B8F3C;
+    max-width: 1050px;
+    margin: 0 auto 22px;
+    letter-spacing: -1px;
+}
+
+@media (max-width: 700px) {
+    .home-page .intro-home .intro-title {
+        font-size: 36px;
+        line-height: 1.1;
+        max-width: 100%;
+        letter-spacing: -0.5px;
+    }
+}
