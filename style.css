@@ -717,3 +717,80 @@ margin-right: auto;
 .home-page .app-header {
     background: #F8FCF9;
 }
+/* ===== NOUVELLE INTRO TOUTOU MAP ===== */
+
+.home-page .intro-home {
+    max-width: 1000px;
+    margin: 28px auto 0;
+    padding: 0 25px;
+    text-align: center;
+}
+
+/* Petite accroche */
+.home-page .intro-home .intro-small {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0B8F3C;
+    margin: 0 0 14px;
+}
+
+/* Phrase principale */
+.home-page .intro-home .intro-title {
+    font-size: 38px;
+    line-height: 1.15;
+    font-weight: 800;
+    color: #0B8F3C;
+    margin: 0 auto 18px;
+    max-width: 900px;
+}
+
+/* Explication */
+.home-page .intro-home .intro-description {
+    font-size: 21px;
+    line-height: 1.45;
+    font-weight: 400;
+    color: #1f2430;
+    margin: 0 auto 18px;
+}
+
+/* Phrase finale */
+.home-page .intro-home .intro-fun {
+    font-size: 20px;
+    line-height: 1.4;
+    font-weight: 600;
+    color: #1f2430;
+    margin: 0 auto;
+    max-width: 900px;
+}
+
+/* ===== VERSION MOBILE ===== */
+
+@media (max-width: 700px) {
+
+    .home-page .intro-home {
+        margin-top: 20px;
+        padding: 0 20px;
+    }
+
+    .home-page .intro-home .intro-small {
+        font-size: 15px;
+        margin-bottom: 12px;
+    }
+
+    .home-page .intro-home .intro-title {
+        font-size: 30px;
+        line-height: 1.12;
+        margin-bottom: 16px;
+    }
+
+    .home-page .intro-home .intro-description {
+        font-size: 17px;
+        line-height: 1.4;
+        margin-bottom: 16px;
+    }
+
+    .home-page .intro-home .intro-fun {
+        font-size: 16px;
+        line-height: 1.4;
+    }
+}
