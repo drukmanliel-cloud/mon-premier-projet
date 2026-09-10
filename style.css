@@ -569,3 +569,66 @@ main section:first-child > p:first-child {
         margin-bottom: 20px;
     }
 }
+/* ===== ESPACEMENTS PLUS AERES ===== */
+
+.home-page .app-header {
+    padding-top: 26px;
+    padding-bottom: 34px;
+}
+
+.home-page .logo-toutou-map {
+    margin-bottom: 34px;
+}
+
+.home-page .intro-home {
+    margin-top: 0;
+    margin-bottom: 42px;
+}
+
+.home-page .intro-home p {
+    margin: 0 0 16px 0;
+}
+
+.home-page .intro-home .intro-title {
+    margin-bottom: 18px;
+}
+
+.home-page .intro-home .intro-fun {
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+.home-page .actions-principales {
+    margin-bottom: 32px;
+}
+
+@media (max-width: 700px) {
+    .home-page .app-header {
+        padding-top: 18px;
+        padding-bottom: 24px;
+    }
+
+    .home-page .logo-toutou-map {
+        margin-bottom: 24px;
+    }
+
+    .home-page .intro-home {
+        margin-bottom: 28px;
+    }
+
+    .home-page .intro-home p {
+        margin-bottom: 12px;
+    }
+
+    .home-page .intro-home .intro-title {
+        margin-bottom: 14px;
+    }
+
+    .home-page .intro-home .intro-fun {
+        margin-top: 16px;
+    }
+
+    .home-page .actions-principales {
+        margin-bottom: 22px;
+    }
+}
