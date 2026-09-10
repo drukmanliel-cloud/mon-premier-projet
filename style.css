@@ -552,3 +552,20 @@ main section:first-child > p:first-child {
     font-size: 16px;
   }
 }
+/* ===== LOGO TOUTOU MAP ===== */
+
+.home-page .logo-toutou-map {
+    display: block;
+    width: 220px;
+    max-width: 70%;
+    height: auto;
+    margin: 0 auto 25px auto;
+}
+
+@media (max-width: 700px) {
+    .home-page .logo-toutou-map {
+        width: 160px;
+        max-width: 65%;
+        margin-bottom: 20px;
+    }
+}
