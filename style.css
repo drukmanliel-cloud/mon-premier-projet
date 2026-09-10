@@ -368,3 +368,144 @@ main section:first-child > p:first-child {
     gap: 15px;
   }
 }
+/* =========================================
+   NOUVEAU DESIGN - PAGE PRINCIPALE TOUTOU MAP
+   ========================================= */
+
+.home-page {
+    background: #f4f8f5;
+    color: #163c2f;
+    font-family: Arial, sans-serif;
+}
+
+/* En-tête */
+.home-page .app-header {
+    background: #ffffff;
+    padding: 18px 20px 14px;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0 3px 18px rgba(0, 0, 0, 0.06);
+    position: relative;
+    z-index: 1000;
+}
+
+.home-page .logo-zone {
+    width: 100%;
+}
+
+.home-page .logo-zone h1 {
+    margin: 0;
+    font-size: 34px;
+    font-weight: 800;
+    color: #0b6f43 !important;
+    line-height: 1.05;
+    letter-spacing: -1px;
+}
+
+.home-page .logo-zone p {
+    margin: 5px 0 0;
+    font-size: 15px;
+    color: #5b6d64;
+    font-weight: 500;
+}
+
+/* Zone principale */
+.home-page main {
+    width: 100%;
+}
+
+.home-page main section:first-child {
+    min-height: auto;
+    padding: 18px 20px 20px;
+    background: #f4f8f5;
+    display: block;
+}
+
+/* Actions */
+.home-page .actions-principales {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.home-page .actions-principales button {
+    width: 100%;
+    min-height: 54px;
+    margin: 0;
+    border-radius: 16px;
+    font-size: 16px;
+    font-weight: 700;
+    box-shadow: 0 6px 16px rgba(11, 143, 60, 0.14) !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.home-page .actions-principales button:first-child {
+    background: #0b8f3c !important;
+    color: #ffffff !important;
+}
+
+.home-page #bouton-signaler {
+    background: #ffffff !important;
+    color: #0b8f3c !important;
+    border: 2px solid #0b8f3c !important;
+}
+
+.home-page .actions-principales button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(11, 143, 60, 0.18) !important;
+}
+
+/* Carte */
+.home-page #map {
+    width: 100%;
+    max-width: 1200px;
+    height: calc(100vh - 180px);
+    min-height: 520px;
+    margin: 0 auto;
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(24, 65, 45, 0.12);
+    border: 1px solid rgba(11, 143, 60, 0.08);
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+
+    .home-page .app-header {
+        padding: 14px 14px 10px;
+    }
+
+    .home-page .logo-zone h1 {
+        font-size: 28px;
+    }
+
+    .home-page .logo-zone p {
+        font-size: 13px;
+        margin-top: 3px;
+    }
+
+    .home-page main section:first-child {
+        padding: 12px 12px 14px;
+    }
+
+    .home-page .actions-principales {
+        grid-template-columns: 1fr;
+        gap: 9px;
+        margin-bottom: 12px;
+    }
+
+    .home-page .actions-principales button {
+        min-height: 50px;
+        font-size: 15px;
+        border-radius: 14px;
+    }
+
+    .home-page #map {
+        height: calc(100vh - 210px);
+        min-height: 480px;
+        border-radius: 18px;
+    }
+}
