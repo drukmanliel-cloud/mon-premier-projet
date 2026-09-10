@@ -687,3 +687,30 @@ margin-right: auto;
     transform: rotate(18deg);
     pointer-events: none;
 }
+/* ===== PETITES CROTTES EN FILIGRANE ===== */
+
+.home-page .logo-zone {
+    position: relative;
+}
+
+.home-page .logo-zone::before {
+    content: "💩";
+    position: absolute;
+    left: 14%;
+    top: 42%;
+    font-size: 34px;
+    opacity: 0.045;
+    transform: rotate(-10deg);
+    pointer-events: none;
+}
+
+.home-page .logo-zone::after {
+    content: "💩";
+    position: absolute;
+    right: 14%;
+    top: 22%;
+    font-size: 30px;
+    opacity: 0.04;
+    transform: rotate(12deg);
+    pointer-events: none;
+}
