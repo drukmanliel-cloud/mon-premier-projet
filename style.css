@@ -714,3 +714,6 @@ margin-right: auto;
     transform: rotate(12deg);
     pointer-events: none;
 }
+.home-page .app-header {
+    background: #F8FCF9;
+}
