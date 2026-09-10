@@ -814,3 +814,10 @@ margin-right: auto;
         letter-spacing: -0.5px;
     }
 }
+/* ===== CARTE VERSION MOBILE ===== */
+
+@media (max-width: 700px) {
+    .home-page #map {
+        height: 520px;
+    }
+}
