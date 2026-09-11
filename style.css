@@ -821,3 +821,9 @@ margin-right: auto;
         height: 520px;
     }
 }
+/* ===== ICONE SIGNALEMENT PAGE ACCUEIL ===== */
+.home-page .icone-signalement {
+    color: #07963f;
+    font-size: 1.25em;
+    margin-right: 8px;
+}
