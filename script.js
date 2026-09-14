@@ -464,3 +464,32 @@ if (error) {
         console.error("Erreur récupération adresse :", error);
     }
 }
+// ===== INSTALLATION TOUTOU MAP =====
+let deferredPrompt;
+
+const boutonInstaller = document.getElementById("bouton-installer");
+
+if (boutonInstaller) {
+    boutonInstaller.style.display = "none";
+
+    window.addEventListener("beforeinstallprompt", (event) => {
+        event.preventDefault();
+        deferredPrompt = event;
+        boutonInstaller.style.display = "block";
+    });
+
+    boutonInstaller.addEventListener("click", async () => {
+        if (!deferredPrompt) return;
+
+        deferredPrompt.prompt();
+        await deferredPrompt.userChoice;
+
+        deferredPrompt = null;
+        boutonInstaller.style.display = "none";
+    });
+
+    window.addEventListener("appinstalled", () => {
+        boutonInstaller.style.display = "none";
+        deferredPrompt = null;
+    });
+}
