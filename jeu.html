@@ -46,7 +46,33 @@
     <div id="chien">🐕</div>
   </div>
 
+<script>
+  const chien = document.getElementById("chien");
+  const jeu = document.getElementById("jeu");
 
+  let positionChien = 50;
+
+  document.addEventListener("keydown", function(event) {
+
+    if (event.key === "ArrowLeft") {
+      positionChien -= 5;
+    }
+
+    if (event.key === "ArrowRight") {
+      positionChien += 5;
+    }
+
+    if (positionChien < 5) {
+      positionChien = 5;
+    }
+
+    if (positionChien > 95) {
+      positionChien = 95;
+    }
+
+    chien.style.left = positionChien + "%";
+  });
+</script>
 </body>
 
 </html>
