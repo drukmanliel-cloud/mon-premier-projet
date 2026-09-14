@@ -57,7 +57,20 @@
 <script>
   const chien = document.getElementById("chien");
   const jeu = document.getElementById("jeu");
+const crotte = document.getElementById("crotte");
 
+let positionCrotte = 20;
+
+setInterval(function() {
+  positionCrotte += 3;
+
+  crotte.style.top = positionCrotte + "px";
+
+  if (positionCrotte > 550) {
+    positionCrotte = -40;
+    crotte.style.left = Math.floor(Math.random() * 90 + 5) + "%";
+  }
+}, 30);
   let positionChien = 50;
 
   document.addEventListener("keydown", function(event) {
