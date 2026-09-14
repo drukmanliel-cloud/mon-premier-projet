@@ -59,6 +59,8 @@
   const chien = document.getElementById("chien");
   const jeu = document.getElementById("jeu");
 const crotte = document.getElementById("crotte");
+  const affichageScore = document.getElementById("score");
+let score = 0;
 
 let positionCrotte = 20;
 
@@ -76,6 +78,8 @@ if (
   zoneCrotte.right >= zoneChien.left &&
   zoneCrotte.left <= zoneChien.right
 ) {
+  score += 1;
+affichageScore.textContent = "Score : " + score;
   positionCrotte = -40;
   crotte.style.left = Math.floor(Math.random() * 90 + 5) + "%";
 }
