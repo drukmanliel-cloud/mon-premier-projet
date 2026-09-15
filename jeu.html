@@ -89,6 +89,8 @@ affichageScore.textContent = "Score : " + score;
 }
 
 if (positionCrotte > 550) {
+  vies -= 1;
+affichageVies.textContent = "Vies : " + "❤️".repeat(vies);
   positionCrotte = -40;
   crotte.style.left = Math.floor(Math.random() * 90 + 5) + "%";
 }
