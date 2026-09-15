@@ -61,11 +61,11 @@
 const crotte = document.getElementById("crotte");
   const affichageScore = document.getElementById("score");
 let score = 0;
-
+let vitesse = 3;
 let positionCrotte = 20;
 
 setInterval(function() {
-  positionCrotte += 3;
+  positionCrotte += vitesse;
 
   crotte.style.top = positionCrotte + "px";
 
