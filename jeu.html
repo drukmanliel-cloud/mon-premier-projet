@@ -73,8 +73,10 @@ let vies = 3;
 let score = 0;
 let vitesse = 3;
 let positionCrotte = 20;
+let jeuTermine = false;
 
 setInterval(function() {
+  if (jeuTermine) return;
   positionCrotte += vitesse;
 
   crotte.style.top = positionCrotte + "px";
@@ -99,6 +101,7 @@ if (positionCrotte > 550) {
   vies -= 1;
 affichageVies.textContent = "Vies : " + "❤️".repeat(vies);
   if (vies === 0) {
+    jeuTermine = true;
     scoreFinal.textContent = "Score : " + score;
     gameOver.style.display = "block";
 }
