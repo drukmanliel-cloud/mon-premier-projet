@@ -121,7 +121,7 @@ let vies = 3;
 let score = 0;
 let vitesse = 3;
 let positionCrotte = 20;
-  let positionCrotte2 = -60;
+ let positionCrotte2 = -120;
 let jeuTermine = false;
 
 setInterval(function() {
@@ -185,7 +185,7 @@ affichageVies.textContent = "Vies : " + "❤️".repeat(vies);
         gameOver.style.display = "block";
     }
 
-    positionCrotte2 = -60;
+    positionCrotte2 = -120;
     crotte2.style.left = Math.floor(Math.random() * 90 + 5) + "%";
 } 
 }, 30);
