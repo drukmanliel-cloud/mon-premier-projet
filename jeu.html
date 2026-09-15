@@ -101,6 +101,7 @@
   <div id="jeu">
     <div id="crotte">💩</div>
     <div id="crotte2">💩</div>
+    <div id="os-or">🦴</div>
     <div id="chien">🐕</div>
     <div id="game-over" style="display: none;">
     <h2>💩 GAME OVER</h2>
@@ -114,6 +115,7 @@
   const jeu = document.getElementById("jeu");
 const crotte = document.getElementById("crotte");
   const crotte2 = document.getElementById("crotte2");
+  const osOr = document.getElementById("os-or");
   const affichageScore = document.getElementById("score");
   const affichageVies = document.getElementById("vies");
 const gameOver = document.getElementById("game-over");
@@ -126,10 +128,22 @@ let score = 0;
 let vitesse = 3;
 let positionCrotte = 20;
  let positionCrotte2 = -120;
+ let positionOsOr = -300;
+let osOrActif = false; 
 let jeuTermine = false;
 
 setInterval(function() {
   if (jeuTermine) return;
+  if (!osOrActif && score >= 15 && Math.random() < 0.002) {
+    osOrActif = true;
+    positionOsOr = -40;
+    osOr.style.left = Math.floor(Math.random() * 90 + 5) + "%";
+    osOr.style.display = "block";
+}
+  if (osOrActif) {
+    positionOsOr += vitesse;
+    osOr.style.top = positionOsOr + "px";
+}
   positionCrotte += vitesse;
   if (score >= 10) {
     positionCrotte2 += vitesse;
@@ -142,6 +156,7 @@ setInterval(function() {
   const zoneChien = chien.getBoundingClientRect();
 const zoneCrotte = crotte.getBoundingClientRect();
   const zoneCrotte2 = crotte2.getBoundingClientRect();
+  const zoneOsOr = osOr.getBoundingClientRect();
 
 if (
   zoneCrotte.bottom >= zoneChien.top &&
@@ -177,6 +192,26 @@ if (
     vitesse += 0.15;
     positionCrotte2 = -60;
     crotte2.style.left = Math.floor(Math.random() * 90 + 5) + "%";
+}
+  if (
+    osOrActif &&
+    zoneOsOr.bottom >= zoneChien.top &&
+    zoneOsOr.top <= zoneChien.bottom &&
+    zoneOsOr.right >= zoneChien.left &&
+    zoneOsOr.left <= zoneChien.right
+) {
+    score += 5;
+    affichageScore.textContent = "Score : " + score;
+
+    if (score > meilleurScore) {
+        meilleurScore = score;
+        localStorage.setItem("toutouMeilleurScore", meilleurScore);
+        affichageMeilleurScore.textContent = "🏆 Meilleur score : " + meilleurScore;
+    }
+
+    osOrActif = false;
+    osOr.style.display = "none";
+    positionOsOr = -300;
 }
 if (positionCrotte > 550) {
   vies -= 1;
