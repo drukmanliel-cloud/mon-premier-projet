@@ -134,7 +134,7 @@ let jeuTermine = false;
 
 setInterval(function() {
   if (jeuTermine) return;
-  if (!osOrActif && score >= 15 && Math.random() < 0.002) {
+ if (!osOrActif && score === 15) {
     osOrActif = true;
     positionOsOr = -40;
     osOr.style.left = Math.floor(Math.random() * 90 + 5) + "%";
