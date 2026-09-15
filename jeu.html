@@ -58,6 +58,14 @@
   transform: translateX(-50%);
   font-size: 40px;
 }
+    #crotte2 {
+    position: absolute;
+    top: -60px;
+    left: 25%;
+    transform: translateX(-50%);
+    font-size: 40px;
+    display: none;
+}
     #game-over {
     position: absolute;
     top: 50%;
@@ -91,6 +99,7 @@
 
   <div id="jeu">
     <div id="crotte">💩</div>
+    <div id="crotte2">💩</div>
     <div id="chien">🐕</div>
     <div id="game-over" style="display: none;">
     <h2>💩 GAME OVER</h2>
@@ -103,6 +112,7 @@
   const chien = document.getElementById("chien");
   const jeu = document.getElementById("jeu");
 const crotte = document.getElementById("crotte");
+  const crotte2 = document.getElementById("crotte2");
   const affichageScore = document.getElementById("score");
   const affichageVies = document.getElementById("vies");
 const gameOver = document.getElementById("game-over");
@@ -111,16 +121,23 @@ let vies = 3;
 let score = 0;
 let vitesse = 3;
 let positionCrotte = 20;
+  let positionCrotte2 = -60;
 let jeuTermine = false;
 
 setInterval(function() {
   if (jeuTermine) return;
   positionCrotte += vitesse;
+  if (score >= 10) {
+    positionCrotte2 += vitesse;
+    crotte2.style.display = "block";
+    crotte2.style.top = positionCrotte2 + "px";
+}
 
   crotte.style.top = positionCrotte + "px";
 
   const zoneChien = chien.getBoundingClientRect();
 const zoneCrotte = crotte.getBoundingClientRect();
+  const zoneCrotte2 = crotte2.getBoundingClientRect();
 
 if (
   zoneCrotte.bottom >= zoneChien.top &&
@@ -134,7 +151,19 @@ affichageScore.textContent = "Score : " + score;
   positionCrotte = -40;
   crotte.style.left = Math.floor(Math.random() * 90 + 5) + "%";
 }
-
+if (
+    score >= 10 &&
+    zoneCrotte2.bottom >= zoneChien.top &&
+    zoneCrotte2.top <= zoneChien.bottom &&
+    zoneCrotte2.right >= zoneChien.left &&
+    zoneCrotte2.left <= zoneChien.right
+) {
+    score += 1;
+    affichageScore.textContent = "Score : " + score;
+    vitesse += 0.15;
+    positionCrotte2 = -60;
+    crotte2.style.left = Math.floor(Math.random() * 90 + 5) + "%";
+}
 if (positionCrotte > 550) {
   vies -= 1;
 affichageVies.textContent = "Vies : " + "❤️".repeat(vies);
@@ -146,6 +175,19 @@ affichageVies.textContent = "Vies : " + "❤️".repeat(vies);
   positionCrotte = -40;
   crotte.style.left = Math.floor(Math.random() * 90 + 5) + "%";
 }
+ if (score >= 10 && positionCrotte2 > 550) {
+    vies -= 1;
+    affichageVies.textContent = "Vies : " + "💗".repeat(vies);
+
+    if (vies === 0) {
+        jeuTermine = true;
+        scoreFinal.textContent = "Score : " + score;
+        gameOver.style.display = "block";
+    }
+
+    positionCrotte2 = -60;
+    crotte2.style.left = Math.floor(Math.random() * 90 + 5) + "%";
+} 
 }, 30);
   let positionChien = 50;
 
