@@ -66,6 +66,15 @@
     font-size: 40px;
     display: none;
 }
+    #crotteOr {
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 48px;
+    display: none;
+    filter: sepia(1) saturate(8) hue-rotate(5deg) brightness(1.25);
+}
     #game-over {
     position: absolute;
     top: 50%;
@@ -101,6 +110,7 @@
   <div id="jeu">
     <div id="crotte">💩</div>
     <div id="crotte2">💩</div>
+    <div id="crotteOr">💩</div>
     <div id="chien">🐕</div>
     <div id="game-over" style="display: none;">
     <h2>💩 GAME OVER</h2>
@@ -114,6 +124,7 @@
   const jeu = document.getElementById("jeu");
 const crotte = document.getElementById("crotte");
   const crotte2 = document.getElementById("crotte2");
+  const crotteOr = document.getElementById("crotteOr");
   const affichageScore = document.getElementById("score");
   const affichageVies = document.getElementById("vies");
 const gameOver = document.getElementById("game-over");
@@ -126,12 +137,25 @@ let score = 0;
 let vitesse = 3;
 let positionCrotte = 20;
  let positionCrotte2 = -120;
+  let positionCrotteOr = -100;
+let crotteOrActive = false;
+  crotteOr.style.display = "none";
 let jeuTermine = false;
 
 setInterval(function() {
   if (jeuTermine) return;
- 
+  if (!crotteOrActive && score >= 40) {
+    crotteOrActive = true;
+    positionCrotteOr = -40;
+    crotteOr.style.left = Math.floor(Math.random() * 90 + 5) + "%";
+    crotteOr.style.display = "block";
+}
+ if (crotteOrActive) {
+    positionCrotteOr += vitesse;
+    crotteOr.style.top = positionCrotteOr + "px";
+}
   positionCrotte += vitesse;
+  
   if (score >= 10) {
     positionCrotte2 += vitesse;
     crotte2.style.display = "block";
@@ -143,6 +167,7 @@ setInterval(function() {
   const zoneChien = chien.getBoundingClientRect();
 const zoneCrotte = crotte.getBoundingClientRect();
   const zoneCrotte2 = crotte2.getBoundingClientRect();
+  const zoneCrotteOr = crotteOr.getBoundingClientRect();
 
 
 if (
@@ -180,7 +205,23 @@ if (
     positionCrotte2 = -60;
     crotte2.style.left = Math.floor(Math.random() * 90 + 5) + "%";
 }
- 
+ if (
+    crotteOrActive &&
+    zoneCrotteOr.bottom >= zoneChien.top &&
+    zoneCrotteOr.top <= zoneChien.bottom &&
+    zoneCrotteOr.right >= zoneChien.left &&
+    zoneCrotteOr.left <= zoneChien.right
+) {
+    score += 10;
+    affichageScore.textContent = "Score : " + score;
+
+    crotteOrActive = false;
+    crotteOr.style.display = "none";
+}
+  if (crotteOrActive && positionCrotteOr > 550) {
+    crotteOrActive = false;
+    crotteOr.style.display = "none";
+}
 if (positionCrotte > 550) {
   vies -= 1;
 affichageVies.textContent = "Vies : " + "❤️".repeat(vies);
