@@ -271,6 +271,21 @@ affichageVies.textContent = "Vies : " + "❤️".repeat(vies);
 
     chien.style.left = positionChien + "%";
   });
+  // Déplacement tactile du chien sur mobile
+jeu.addEventListener("touchmove", function(event) {
+    event.preventDefault();
+
+    const toucher = event.touches[0];
+    const zoneJeu = jeu.getBoundingClientRect();
+
+    let positionX = ((toucher.clientX - zoneJeu.left) / zoneJeu.width) * 100;
+
+    if (positionX < 5) positionX = 5;
+    if (positionX > 95) positionX = 95;
+
+    positionChien = positionX;
+    chien.style.left = positionChien + "%";
+}, { passive: false });
   document.getElementById("rejouer").addEventListener("click", function() {
     location.reload();
 });
