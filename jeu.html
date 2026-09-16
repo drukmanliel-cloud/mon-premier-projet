@@ -139,12 +139,13 @@ let positionCrotte = 20;
  let positionCrotte2 = -120;
   let positionCrotteOr = -100;
 let crotteOrActive = false;
+  let crotteOrUtilisee = false;
   crotteOr.style.display = "none";
 let jeuTermine = false;
 
 setInterval(function() {
   if (jeuTermine) return;
-  if (!crotteOrActive && score >= 40) {
+  if (!crotteOrActive && !crotteOrUtilisee && score >= 40) {
     crotteOrActive = true;
     positionCrotteOr = -40;
     crotteOr.style.left = Math.floor(Math.random() * 90 + 5) + "%";
@@ -214,11 +215,12 @@ if (
 ) {
     score += 10;
     affichageScore.textContent = "Score : " + score;
-
+crotteOrUtilisee = true;
     crotteOrActive = false;
     crotteOr.style.display = "none";
 }
   if (crotteOrActive && positionCrotteOr > 550) {
+    crotteOrUtilisee = true;
     crotteOrActive = false;
     crotteOr.style.display = "none";
 }
