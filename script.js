@@ -486,10 +486,14 @@ if (boutonInstaller) {
 
         deferredPrompt = null;
         boutonInstaller.style.display = "none";
+    
     });
 
     window.addEventListener("appinstalled", () => {
         boutonInstaller.style.display = "none";
         deferredPrompt = null;
+        if (typeof gtag === "function") {
+    gtag("event", "app_installed");
+}
     });
 }
