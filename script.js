@@ -497,3 +497,13 @@ if (boutonInstaller) {
 }
     });
 }
+// ===== SUIVI CLIC TROUVER UN DISTRIBUTEUR =====
+const boutonTrouver = document.getElementById("bouton-trouver");
+
+if (boutonTrouver) {
+    boutonTrouver.addEventListener("click", () => {
+        if (typeof gtag === "function") {
+            gtag("event", "trouver_distributeur");
+        }
+    });
+}
