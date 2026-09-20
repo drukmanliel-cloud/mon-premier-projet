@@ -508,7 +508,7 @@ if (boutonTrouver) {
     });
 }
 // ===== SUIVI CLIC SIGNALER UN DISTRIBUTEUR =====
-const boutonSignaler = document.getElementById("bouton-signaler");
+
 
 if (boutonSignaler) {
     boutonSignaler.addEventListener("click", () => {
