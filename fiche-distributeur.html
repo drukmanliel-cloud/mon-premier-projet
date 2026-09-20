@@ -420,6 +420,16 @@ const messageStatut = document.getElementById("message-statut");
 messageStatut.textContent = "✅ Merci ! Le distributeur est signalé vide.";
 messageStatut.className = "message-succes";
 });
+   // ===== SUIVI CLIC ITINERAIRE =====
+const boutonItineraire = document.getElementById("bouton-itineraire");
+
+if (boutonItineraire) {
+    boutonItineraire.addEventListener("click", () => {
+        if (typeof gtag === "function") {
+            gtag("event", "itineraire_distributeur");
+        }
+    });
+}
 </script>
 </body>
 </html>
