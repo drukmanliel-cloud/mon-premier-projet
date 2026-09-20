@@ -517,3 +517,13 @@ if (boutonSignaler) {
         }
     });
 }
+// ===== SUIVI CLIC TOUTOU GAME =====
+const boutonJeu = document.getElementById("bouton-jeu");
+
+if (boutonJeu) {
+    boutonJeu.addEventListener("click", () => {
+        if (typeof gtag === "function") {
+            gtag("event", "toutou_game");
+        }
+    });
+}
