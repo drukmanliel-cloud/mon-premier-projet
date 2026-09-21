@@ -404,7 +404,10 @@ if (dernierVote && Date.now() - new Date(dernierVote).getTime() < dureeBlocage) 
 localStorage.setItem(cleVote, new Date().toISOString());
     document.getElementById("etat").textContent = "VIDE";
 document.getElementById("icone-etat").textContent = "🔴";
-
+// Suivi Analytics : distributeur signalé vide
+if (typeof gtag === "function") {
+    gtag("event", "distributeur_vide");
+}
 const maintenantVide = new Date();
 
 document.getElementById("derniere-verification").textContent =
