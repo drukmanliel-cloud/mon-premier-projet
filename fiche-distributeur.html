@@ -353,7 +353,10 @@ console.log("Erreur Supabase :", error);
 localStorage.setItem(cleVote, new Date().toISOString());
    document.getElementById("etat").textContent = "PLEIN";
 document.getElementById("icone-etat").textContent = "🟢";
-
+// Suivi Analytics : distributeur signalé plein
+if (typeof gtag === "function") {
+    gtag("event", "distributeur_plein");
+}
 const maintenant = new Date();
 
 document.getElementById("derniere-verification").textContent =
