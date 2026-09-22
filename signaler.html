@@ -349,7 +349,10 @@ if (distributeurProche) {
     boutonConfirmer.disabled = false;
     return;
   }
-
+// Suivi Analytics : nouveau distributeur réellement signalé
+if (typeof gtag === "function") {
+    gtag("event", "nouveau_distributeur_signale");
+}
   messageConfirmation.textContent =
     "✅ Merci ! Le distributeur a bien été signalé et sera vérifié.";
 
