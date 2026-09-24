@@ -827,3 +827,39 @@ margin-right: auto;
     font-size: 1.25em;
     margin-right: 8px;
 }
+/* ===== ZONE SEO ACCUEIL ===== */
+.home-page .seo-info {
+    max-width: 1000px;
+    margin: 45px auto;
+    padding: 30px 25px;
+    text-align: center;
+}
+
+.home-page .seo-info h2 {
+    font-size: 28px;
+    line-height: 1.2;
+    color: #0B8F3C;
+    margin: 0 0 18px;
+}
+
+.home-page .seo-info p {
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+@media (max-width: 700px) {
+    .home-page .seo-info {
+        margin: 30px auto;
+        padding: 25px 20px;
+    }
+
+    .home-page .seo-info h2 {
+        font-size: 23px;
+    }
+
+    .home-page .seo-info p {
+        font-size: 16px;
+    }
+}
