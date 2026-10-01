@@ -863,3 +863,42 @@ margin-right: auto;
         font-size: 16px;
     }
 }
+/* ===== PAGE VILLE TOUTOU MAP ===== */
+
+.page-ville {
+    background: #f3f5f5;
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+.page-ville main {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    padding: 45px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.page-ville h1 {
+    color: #0B8F3C;
+    font-size: 36px;
+    line-height: 1.2;
+    margin: 0 0 25px;
+}
+
+.page-ville p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.page-ville a {
+    display: inline-block;
+    background: #0B8F3C;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 14px 24px;
+    border-radius: 12px;
+}
